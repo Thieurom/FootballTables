@@ -9,13 +9,33 @@
 /* Begin PBXBuildFile section */
 		D811440F27CBBAC2008FB825 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811440E27CBBAC2008FB825 /* AppDelegate.swift */; };
 		D811441127CBBAC2008FB825 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811441027CBBAC2008FB825 /* SceneDelegate.swift */; };
-		D811441327CBBAC2008FB825 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811441227CBBAC2008FB825 /* ViewController.swift */; };
-		D811441627CBBAC2008FB825 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D811441427CBBAC2008FB825 /* Main.storyboard */; };
 		D811441827CBBAC4008FB825 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D811441727CBBAC4008FB825 /* Assets.xcassets */; };
 		D811441B27CBBAC4008FB825 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D811441927CBBAC4008FB825 /* LaunchScreen.storyboard */; };
 		D811442627CBBAC4008FB825 /* FootballTablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811442527CBBAC4008FB825 /* FootballTablesTests.swift */; };
 		D811443027CBBAC4008FB825 /* FootballTablesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811442F27CBBAC4008FB825 /* FootballTablesUITests.swift */; };
 		D811443227CBBAC4008FB825 /* FootballTablesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811443127CBBAC4008FB825 /* FootballTablesUITestsLaunchTests.swift */; };
+		D811444027CBBD96008FB825 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D811443F27CBBD96008FB825 /* ComposableArchitecture */; };
+		D811444327CBBDB5008FB825 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D811444227CBBDB5008FB825 /* SnapKit */; };
+		D811444627CBBDCB008FB825 /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = D811444527CBBDCB008FB825 /* SDWebImageSVGCoder */; };
+		D811444827CBBE43008FB825 /* StoreViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811444727CBBE43008FB825 /* StoreViewState.swift */; };
+		D811444A27CBBE59008FB825 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811444927CBBE59008FB825 /* StoreViewController.swift */; };
+		D811444C27CBBE75008FB825 /* StoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811444B27CBBE75008FB825 /* StoreTableViewCell.swift */; };
+		D811444F27CBBECC008FB825 /* CompetitionStandingView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811444E27CBBECC008FB825 /* CompetitionStandingView+Core.swift */; };
+		D811445227CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445127CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift */; };
+		D811445427CBBF19008FB825 /* CompetitionStandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445327CBBF19008FB825 /* CompetitionStandingViewController.swift */; };
+		D811445627CBBF27008FB825 /* StandingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445527CBBF27008FB825 /* StandingViewCell.swift */; };
+		D811445A27CBC102008FB825 /* FootballDataClient in Frameworks */ = {isa = PBXBuildFile; productRef = D811445927CBC102008FB825 /* FootballDataClient */; };
+		D811445C27CBC146008FB825 /* Applicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445B27CBC146008FB825 /* Applicable.swift */; };
+		D811445E27CBC1B9008FB825 /* Sectionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445D27CBC1B9008FB825 /* Sectionable.swift */; };
+		D811446127CBC212008FB825 /* Array+Sectionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811446027CBC212008FB825 /* Array+Sectionable.swift */; };
+		D811446327CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811446227CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift */; };
+		D811446627CBC329008FB825 /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811446527CBC329008FB825 /* TeamViewController.swift */; };
+		D811446827CBC342008FB825 /* TeamView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811446727CBC342008FB825 /* TeamView+Core.swift */; };
+		D811446A27CBC400008FB825 /* TeamView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811446927CBC400008FB825 /* TeamView+ViewState.swift */; };
+		D811446C27CBC418008FB825 /* TeamDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811446B27CBC418008FB825 /* TeamDetailViewCell.swift */; };
+		D811447127CBC88D008FB825 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811447027CBC88D008FB825 /* Secrets.swift */; };
+		D811447627CBC94B008FB825 /* Secrets.swift.example in Resources */ = {isa = PBXBuildFile; fileRef = D811447527CBC94B008FB825 /* Secrets.swift.example */; };
+		D811447827CBD699008FB825 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811447727CBD699008FB825 /* Sequence+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +59,6 @@
 		D811440B27CBBAC2008FB825 /* FootballTables.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootballTables.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D811440E27CBBAC2008FB825 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D811441027CBBAC2008FB825 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D811441227CBBAC2008FB825 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D811441527CBBAC2008FB825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D811441727CBBAC4008FB825 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D811441A27CBBAC4008FB825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D811441C27CBBAC4008FB825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +67,24 @@
 		D811442B27CBBAC4008FB825 /* FootballTablesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FootballTablesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D811442F27CBBAC4008FB825 /* FootballTablesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTablesUITests.swift; sourceTree = "<group>"; };
 		D811443127CBBAC4008FB825 /* FootballTablesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTablesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D811444727CBBE43008FB825 /* StoreViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewState.swift; sourceTree = "<group>"; };
+		D811444927CBBE59008FB825 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		D811444B27CBBE75008FB825 /* StoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewCell.swift; sourceTree = "<group>"; };
+		D811444E27CBBECC008FB825 /* CompetitionStandingView+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionStandingView+Core.swift"; sourceTree = "<group>"; };
+		D811445127CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionStandingView+ViewState.swift"; sourceTree = "<group>"; };
+		D811445327CBBF19008FB825 /* CompetitionStandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStandingViewController.swift; sourceTree = "<group>"; };
+		D811445527CBBF27008FB825 /* StandingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingViewCell.swift; sourceTree = "<group>"; };
+		D811445B27CBC146008FB825 /* Applicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applicable.swift; sourceTree = "<group>"; };
+		D811445D27CBC1B9008FB825 /* Sectionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sectionable.swift; sourceTree = "<group>"; };
+		D811446027CBC212008FB825 /* Array+Sectionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sectionable.swift"; sourceTree = "<group>"; };
+		D811446227CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewDiffableDataSource+Extensions.swift"; sourceTree = "<group>"; };
+		D811446527CBC329008FB825 /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
+		D811446727CBC342008FB825 /* TeamView+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeamView+Core.swift"; sourceTree = "<group>"; };
+		D811446927CBC400008FB825 /* TeamView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeamView+ViewState.swift"; sourceTree = "<group>"; };
+		D811446B27CBC418008FB825 /* TeamDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailViewCell.swift; sourceTree = "<group>"; };
+		D811447027CBC88D008FB825 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		D811447527CBC94B008FB825 /* Secrets.swift.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.swift.example; sourceTree = "<group>"; };
+		D811447727CBD699008FB825 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +92,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D811444627CBBDCB008FB825 /* SDWebImageSVGCoder in Frameworks */,
+				D811444027CBBD96008FB825 /* ComposableArchitecture in Frameworks */,
+				D811445A27CBC102008FB825 /* FootballDataClient in Frameworks */,
+				D811444327CBBDB5008FB825 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,13 +139,14 @@
 		D811440D27CBBAC2008FB825 /* FootballTables */ = {
 			isa = PBXGroup;
 			children = (
-				D811440E27CBBAC2008FB825 /* AppDelegate.swift */,
-				D811441027CBBAC2008FB825 /* SceneDelegate.swift */,
-				D811441227CBBAC2008FB825 /* ViewController.swift */,
-				D811441427CBBAC2008FB825 /* Main.storyboard */,
-				D811441727CBBAC4008FB825 /* Assets.xcassets */,
-				D811441927CBBAC4008FB825 /* LaunchScreen.storyboard */,
-				D811441C27CBBAC4008FB825 /* Info.plist */,
+				D811445F27CBC1F6008FB825 /* Common */,
+				D811445027CBBED9008FB825 /* CompetitionStandingView */,
+				D811444D27CBBEA8008FB825 /* ComposableExtensions */,
+				D811446427CBC25A008FB825 /* Extensions */,
+				D811446F27CBC484008FB825 /* Main */,
+				D811446E27CBC479008FB825 /* Resources */,
+				D811446D27CBC43B008FB825 /* TeamView */,
+				D811447227CBC892008FB825 /* Secrets */,
 			);
 			path = FootballTables;
 			sourceTree = "<group>";
@@ -127,6 +168,85 @@
 			path = FootballTablesUITests;
 			sourceTree = "<group>";
 		};
+		D811444D27CBBEA8008FB825 /* ComposableExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				D811444727CBBE43008FB825 /* StoreViewState.swift */,
+				D811444927CBBE59008FB825 /* StoreViewController.swift */,
+				D811444B27CBBE75008FB825 /* StoreTableViewCell.swift */,
+			);
+			path = ComposableExtensions;
+			sourceTree = "<group>";
+		};
+		D811445027CBBED9008FB825 /* CompetitionStandingView */ = {
+			isa = PBXGroup;
+			children = (
+				D811444E27CBBECC008FB825 /* CompetitionStandingView+Core.swift */,
+				D811445127CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift */,
+				D811445327CBBF19008FB825 /* CompetitionStandingViewController.swift */,
+				D811445527CBBF27008FB825 /* StandingViewCell.swift */,
+			);
+			path = CompetitionStandingView;
+			sourceTree = "<group>";
+		};
+		D811445F27CBC1F6008FB825 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D811445D27CBC1B9008FB825 /* Sectionable.swift */,
+				D811445B27CBC146008FB825 /* Applicable.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		D811446427CBC25A008FB825 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D811446027CBC212008FB825 /* Array+Sectionable.swift */,
+				D811446227CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift */,
+				D811447727CBD699008FB825 /* Sequence+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D811446D27CBC43B008FB825 /* TeamView */ = {
+			isa = PBXGroup;
+			children = (
+				D811446527CBC329008FB825 /* TeamViewController.swift */,
+				D811446727CBC342008FB825 /* TeamView+Core.swift */,
+				D811446927CBC400008FB825 /* TeamView+ViewState.swift */,
+				D811446B27CBC418008FB825 /* TeamDetailViewCell.swift */,
+			);
+			path = TeamView;
+			sourceTree = "<group>";
+		};
+		D811446E27CBC479008FB825 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D811441C27CBBAC4008FB825 /* Info.plist */,
+				D811441727CBBAC4008FB825 /* Assets.xcassets */,
+				D811441927CBBAC4008FB825 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D811446F27CBC484008FB825 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D811440E27CBBAC2008FB825 /* AppDelegate.swift */,
+				D811441027CBBAC2008FB825 /* SceneDelegate.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D811447227CBC892008FB825 /* Secrets */ = {
+			isa = PBXGroup;
+			children = (
+				D811447027CBC88D008FB825 /* Secrets.swift */,
+				D811447527CBC94B008FB825 /* Secrets.swift.example */,
+			);
+			path = Secrets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +263,12 @@
 			dependencies = (
 			);
 			name = FootballTables;
+			packageProductDependencies = (
+				D811443F27CBBD96008FB825 /* ComposableArchitecture */,
+				D811444227CBBDB5008FB825 /* SnapKit */,
+				D811444527CBBDCB008FB825 /* SDWebImageSVGCoder */,
+				D811445927CBC102008FB825 /* FootballDataClient */,
+			);
 			productName = FootballTables;
 			productReference = D811440B27CBBAC2008FB825 /* FootballTables.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +341,12 @@
 				Base,
 			);
 			mainGroup = D811440227CBBAC2008FB825;
+			packageReferences = (
+				D811443E27CBBD96008FB825 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				D811444127CBBDB5008FB825 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D811444427CBBDCB008FB825 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
+				D811445827CBC102008FB825 /* XCRemoteSwiftPackageReference "FootballDataClient" */,
+			);
 			productRefGroup = D811440C27CBBAC2008FB825 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,7 +365,7 @@
 			files = (
 				D811441B27CBBAC4008FB825 /* LaunchScreen.storyboard in Resources */,
 				D811441827CBBAC4008FB825 /* Assets.xcassets in Resources */,
-				D811441627CBBAC2008FB825 /* Main.storyboard in Resources */,
+				D811447627CBC94B008FB825 /* Secrets.swift.example in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +390,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D811441327CBBAC2008FB825 /* ViewController.swift in Sources */,
+				D811445227CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift in Sources */,
+				D811447127CBC88D008FB825 /* Secrets.swift in Sources */,
+				D811444A27CBBE59008FB825 /* StoreViewController.swift in Sources */,
+				D811446327CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift in Sources */,
+				D811444F27CBBECC008FB825 /* CompetitionStandingView+Core.swift in Sources */,
+				D811444827CBBE43008FB825 /* StoreViewState.swift in Sources */,
+				D811445627CBBF27008FB825 /* StandingViewCell.swift in Sources */,
+				D811446827CBC342008FB825 /* TeamView+Core.swift in Sources */,
+				D811446127CBC212008FB825 /* Array+Sectionable.swift in Sources */,
+				D811445427CBBF19008FB825 /* CompetitionStandingViewController.swift in Sources */,
+				D811447827CBD699008FB825 /* Sequence+Extensions.swift in Sources */,
+				D811446C27CBC418008FB825 /* TeamDetailViewCell.swift in Sources */,
 				D811440F27CBBAC2008FB825 /* AppDelegate.swift in Sources */,
 				D811441127CBBAC2008FB825 /* SceneDelegate.swift in Sources */,
+				D811445C27CBC146008FB825 /* Applicable.swift in Sources */,
+				D811446A27CBC400008FB825 /* TeamView+ViewState.swift in Sources */,
+				D811444C27CBBE75008FB825 /* StoreTableViewCell.swift in Sources */,
+				D811445E27CBC1B9008FB825 /* Sectionable.swift in Sources */,
+				D811446627CBC329008FB825 /* TeamViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +445,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D811441427CBBAC2008FB825 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D811441527CBBAC2008FB825 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D811441927CBBAC4008FB825 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -441,10 +581,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GYPH974N94;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FootballTables/Info.plist;
+				INFOPLIST_FILE = FootballTables/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -470,10 +609,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GYPH974N94;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FootballTables/Info.plist;
+				INFOPLIST_FILE = FootballTables/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -606,6 +744,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D811443E27CBBD96008FB825 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+		D811444127CBBDB5008FB825 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		D811444427CBBDCB008FB825 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSVGCoder";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		D811445827CBC102008FB825 /* XCRemoteSwiftPackageReference "FootballDataClient" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Thieurom/FootballDataClient";
+			requirement = {
+				kind = exactVersion;
+				version = "0.1.0-alpha.1";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D811443F27CBBD96008FB825 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D811443E27CBBD96008FB825 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		D811444227CBBDB5008FB825 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D811444127CBBDB5008FB825 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		D811444527CBBDCB008FB825 /* SDWebImageSVGCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D811444427CBBDCB008FB825 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */;
+			productName = SDWebImageSVGCoder;
+		};
+		D811445927CBC102008FB825 /* FootballDataClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D811445827CBC102008FB825 /* XCRemoteSwiftPackageReference "FootballDataClient" */;
+			productName = FootballDataClient;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D811440327CBBAC2008FB825 /* Project object */;
 }

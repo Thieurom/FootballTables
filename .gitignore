@@ -1,0 +1,10 @@
+.DS_Store                                                                                
+xcuserdata/
+Packages/
+Package.resolved
+*.xcodeproj
+.swiftpm
+.build/
+.env
+.private
+FootballTables/Secrets/Secrets.swift

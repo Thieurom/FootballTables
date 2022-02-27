@@ -5,18 +5,30 @@
 //  Created by Doan Le Thieu on 27/02/2022.
 //
 
+import FootballDataClient
+import ComposableArchitecture
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    // TODO: TEMP
+    let premierLeagueId = 2021
+
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+
+        let window = UIWindow(windowScene: windowScene)
+
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [
+            competitionStandingViewController()
+        ].map(UINavigationController.init(rootViewController:))
+
+        window.rootViewController = tabBarController
+        self.window = window
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,3 +62,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+// MARK: - Private
+
+extension SceneDelegate {
+    private func competitionStandingViewController() -> CompetitionStandingViewController {
+        let store = Store(
+            initialState: CompetitionStandingView.State(
+                competitionId: 2021
+            ),
+            reducer: CompetitionStandingView.reducer,
+            environment: CompetitionStandingView.Environment(
+                apiClient: FootballDataClient(apiToken: apiToken),
+                mainQueue: .main
+            )
+        )
+
+        let competitionStandingViewController = CompetitionStandingViewController(store: store)
+        let tabBarItem = UITabBarItem()
+//        tabBarItem.title = "Table"
+        tabBarItem.image = UIImage(systemName: "equal")
+        competitionStandingViewController.tabBarItem = tabBarItem
+
+        return competitionStandingViewController
+    }
+}
