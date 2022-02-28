@@ -13,17 +13,13 @@ class CompetitionStandingViewController: StoreViewController<CompetitionStanding
 
     // MARK: - Views
 
-    lazy var loadingIndicator = UIActivityIndicatorView().apply {
-        $0.hidesWhenStopped = true
-    }
-
     lazy var standingTableView = UITableView().apply {
         $0.backgroundColor = .clear
     }
 
     // MARK: - DataSource
 
-    private var dataSource: UITableViewDiffableDataSource<CompetitionStandingView.ViewState.Section, StandingViewState>!
+    private var dataSource: UITableViewDiffableDataSource<CompetitionStandingView.ViewState.Section, TeamStandingViewState>!
 
     // MARK: - View lifecycle
 
@@ -34,8 +30,6 @@ class CompetitionStandingViewController: StoreViewController<CompetitionStanding
         setupDataSource()
         setupChildViewControllers()
         observeViewStore()
-
-        viewStore.send(.viewDidLoad)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -52,12 +46,13 @@ class CompetitionStandingViewController: StoreViewController<CompetitionStanding
 extension CompetitionStandingViewController {
     private func setupViews() {
         // Style
+        // `white` isn't clearly showing the separation between table view's sections,
+        // but keep it for now.
         view.backgroundColor = .white
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .never
 
         // Layout
         view.addSubview(standingTableView)
-        view.addSubview(loadingIndicator)
 
         standingTableView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -66,18 +61,13 @@ extension CompetitionStandingViewController {
             make.bottom.equalToSuperview()
         }
 
-        loadingIndicator.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
-
-        standingTableView.register(StandingViewCell.self, forCellReuseIdentifier: StandingViewCell.identifier)
+        standingTableView.register(TeamStandingViewCell.self, forCellReuseIdentifier: TeamStandingViewCell.identifier)
     }
 
     private func setupDataSource() {
-        dataSource = UITableViewDiffableDataSource<CompetitionStandingView.ViewState.Section, StandingViewState>(tableView: standingTableView) { [weak self] tableView, indexPath, itemState in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: StandingViewCell.identifier, for: indexPath) as? StandingViewCell else {
-                fatalError("Failed to dequeue cell of `StandingViewCell`")
+        dataSource = UITableViewDiffableDataSource<CompetitionStandingView.ViewState.Section, TeamStandingViewState>(tableView: standingTableView) { [weak self] tableView, indexPath, itemState in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamStandingViewCell.identifier, for: indexPath) as? TeamStandingViewCell else {
+                fatalError("Failed to dequeue cell of `TeamStandingViewCell`")
             }
 
             cell.store = self?.store
@@ -116,17 +106,6 @@ extension CompetitionStandingViewController {
 
 extension CompetitionStandingViewController {
     private func observeViewStore() {
-        viewStore.publisher
-            .isRequestInFlight
-            .sink { [weak self] in
-                if $0 {
-                    self?.loadingIndicator.startAnimating()
-                } else {
-                    self?.loadingIndicator.stopAnimating()
-                }
-            }
-            .store(in: &cancellables)
-
         viewStore.publisher
             .leagueName
             .assign(to: \.title, on: navigationItem)

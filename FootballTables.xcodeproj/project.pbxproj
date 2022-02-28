@@ -23,7 +23,7 @@
 		D811444F27CBBECC008FB825 /* CompetitionStandingView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811444E27CBBECC008FB825 /* CompetitionStandingView+Core.swift */; };
 		D811445227CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445127CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift */; };
 		D811445427CBBF19008FB825 /* CompetitionStandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445327CBBF19008FB825 /* CompetitionStandingViewController.swift */; };
-		D811445627CBBF27008FB825 /* StandingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445527CBBF27008FB825 /* StandingViewCell.swift */; };
+		D811445627CBBF27008FB825 /* TeamStandingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445527CBBF27008FB825 /* TeamStandingViewCell.swift */; };
 		D811445A27CBC102008FB825 /* FootballDataClient in Frameworks */ = {isa = PBXBuildFile; productRef = D811445927CBC102008FB825 /* FootballDataClient */; };
 		D811445C27CBC146008FB825 /* Applicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445B27CBC146008FB825 /* Applicable.swift */; };
 		D811445E27CBC1B9008FB825 /* Sectionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811445D27CBC1B9008FB825 /* Sectionable.swift */; };
@@ -36,6 +36,11 @@
 		D811447127CBC88D008FB825 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811447027CBC88D008FB825 /* Secrets.swift */; };
 		D811447627CBC94B008FB825 /* Secrets.swift.example in Resources */ = {isa = PBXBuildFile; fileRef = D811447527CBC94B008FB825 /* Secrets.swift.example */; };
 		D811447827CBD699008FB825 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811447727CBD699008FB825 /* Sequence+Extensions.swift */; };
+		D811447B27CCBF2B008FB825 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = D811447A27CCBF2B008FB825 /* CombineExt */; };
+		D811447D27CCC013008FB825 /* StandingDashboardView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811447C27CCC013008FB825 /* StandingDashboardView+Core.swift */; };
+		D811448027CCC227008FB825 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811447F27CCC227008FB825 /* Array+Extensions.swift */; };
+		D811448227CCC94B008FB825 /* StandingDashboardView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448127CCC94B008FB825 /* StandingDashboardView+ViewState.swift */; };
+		D811448427CCCA17008FB825 /* StandingDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448327CCCA17008FB825 /* StandingDashboardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +78,7 @@
 		D811444E27CBBECC008FB825 /* CompetitionStandingView+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionStandingView+Core.swift"; sourceTree = "<group>"; };
 		D811445127CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionStandingView+ViewState.swift"; sourceTree = "<group>"; };
 		D811445327CBBF19008FB825 /* CompetitionStandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStandingViewController.swift; sourceTree = "<group>"; };
-		D811445527CBBF27008FB825 /* StandingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingViewCell.swift; sourceTree = "<group>"; };
+		D811445527CBBF27008FB825 /* TeamStandingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamStandingViewCell.swift; sourceTree = "<group>"; };
 		D811445B27CBC146008FB825 /* Applicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applicable.swift; sourceTree = "<group>"; };
 		D811445D27CBC1B9008FB825 /* Sectionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sectionable.swift; sourceTree = "<group>"; };
 		D811446027CBC212008FB825 /* Array+Sectionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sectionable.swift"; sourceTree = "<group>"; };
@@ -85,6 +90,10 @@
 		D811447027CBC88D008FB825 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		D811447527CBC94B008FB825 /* Secrets.swift.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.swift.example; sourceTree = "<group>"; };
 		D811447727CBD699008FB825 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
+		D811447C27CCC013008FB825 /* StandingDashboardView+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StandingDashboardView+Core.swift"; sourceTree = "<group>"; };
+		D811447F27CCC227008FB825 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		D811448127CCC94B008FB825 /* StandingDashboardView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StandingDashboardView+ViewState.swift"; sourceTree = "<group>"; };
+		D811448327CCCA17008FB825 /* StandingDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingDashboardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +104,7 @@
 				D811444627CBBDCB008FB825 /* SDWebImageSVGCoder in Frameworks */,
 				D811444027CBBD96008FB825 /* ComposableArchitecture in Frameworks */,
 				D811445A27CBC102008FB825 /* FootballDataClient in Frameworks */,
+				D811447B27CCBF2B008FB825 /* CombineExt in Frameworks */,
 				D811444327CBBDB5008FB825 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,8 +155,9 @@
 				D811446427CBC25A008FB825 /* Extensions */,
 				D811446F27CBC484008FB825 /* Main */,
 				D811446E27CBC479008FB825 /* Resources */,
-				D811446D27CBC43B008FB825 /* TeamView */,
 				D811447227CBC892008FB825 /* Secrets */,
+				D811447E27CCC01C008FB825 /* StandingDashboardView */,
+				D811446D27CBC43B008FB825 /* TeamView */,
 			);
 			path = FootballTables;
 			sourceTree = "<group>";
@@ -184,7 +195,7 @@
 				D811444E27CBBECC008FB825 /* CompetitionStandingView+Core.swift */,
 				D811445127CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift */,
 				D811445327CBBF19008FB825 /* CompetitionStandingViewController.swift */,
-				D811445527CBBF27008FB825 /* StandingViewCell.swift */,
+				D811445527CBBF27008FB825 /* TeamStandingViewCell.swift */,
 			);
 			path = CompetitionStandingView;
 			sourceTree = "<group>";
@@ -202,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				D811446027CBC212008FB825 /* Array+Sectionable.swift */,
+				D811447F27CCC227008FB825 /* Array+Extensions.swift */,
 				D811446227CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift */,
 				D811447727CBD699008FB825 /* Sequence+Extensions.swift */,
 			);
@@ -247,6 +259,16 @@
 			path = Secrets;
 			sourceTree = "<group>";
 		};
+		D811447E27CCC01C008FB825 /* StandingDashboardView */ = {
+			isa = PBXGroup;
+			children = (
+				D811447C27CCC013008FB825 /* StandingDashboardView+Core.swift */,
+				D811448127CCC94B008FB825 /* StandingDashboardView+ViewState.swift */,
+				D811448327CCCA17008FB825 /* StandingDashboardViewController.swift */,
+			);
+			path = StandingDashboardView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -268,6 +290,7 @@
 				D811444227CBBDB5008FB825 /* SnapKit */,
 				D811444527CBBDCB008FB825 /* SDWebImageSVGCoder */,
 				D811445927CBC102008FB825 /* FootballDataClient */,
+				D811447A27CCBF2B008FB825 /* CombineExt */,
 			);
 			productName = FootballTables;
 			productReference = D811440B27CBBAC2008FB825 /* FootballTables.app */;
@@ -346,6 +369,7 @@
 				D811444127CBBDB5008FB825 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D811444427CBBDCB008FB825 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
 				D811445827CBC102008FB825 /* XCRemoteSwiftPackageReference "FootballDataClient" */,
+				D811447927CCBF2B008FB825 /* XCRemoteSwiftPackageReference "CombineExt" */,
 			);
 			productRefGroup = D811440C27CBBAC2008FB825 /* Products */;
 			projectDirPath = "";
@@ -391,19 +415,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				D811445227CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift in Sources */,
+				D811447D27CCC013008FB825 /* StandingDashboardView+Core.swift in Sources */,
 				D811447127CBC88D008FB825 /* Secrets.swift in Sources */,
 				D811444A27CBBE59008FB825 /* StoreViewController.swift in Sources */,
 				D811446327CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift in Sources */,
 				D811444F27CBBECC008FB825 /* CompetitionStandingView+Core.swift in Sources */,
 				D811444827CBBE43008FB825 /* StoreViewState.swift in Sources */,
-				D811445627CBBF27008FB825 /* StandingViewCell.swift in Sources */,
+				D811445627CBBF27008FB825 /* TeamStandingViewCell.swift in Sources */,
 				D811446827CBC342008FB825 /* TeamView+Core.swift in Sources */,
 				D811446127CBC212008FB825 /* Array+Sectionable.swift in Sources */,
+				D811448027CCC227008FB825 /* Array+Extensions.swift in Sources */,
 				D811445427CBBF19008FB825 /* CompetitionStandingViewController.swift in Sources */,
 				D811447827CBD699008FB825 /* Sequence+Extensions.swift in Sources */,
+				D811448427CCCA17008FB825 /* StandingDashboardViewController.swift in Sources */,
 				D811446C27CBC418008FB825 /* TeamDetailViewCell.swift in Sources */,
 				D811440F27CBBAC2008FB825 /* AppDelegate.swift in Sources */,
 				D811441127CBBAC2008FB825 /* SceneDelegate.swift in Sources */,
+				D811448227CCC94B008FB825 /* StandingDashboardView+ViewState.swift in Sources */,
 				D811445C27CBC146008FB825 /* Applicable.swift in Sources */,
 				D811446A27CBC400008FB825 /* TeamView+ViewState.swift in Sources */,
 				D811444C27CBBE75008FB825 /* StoreTableViewCell.swift in Sources */,
@@ -778,6 +806,14 @@
 				version = "0.1.0-alpha.1";
 			};
 		};
+		D811447927CCBF2B008FB825 /* XCRemoteSwiftPackageReference "CombineExt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineExt";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -800,6 +836,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D811445827CBC102008FB825 /* XCRemoteSwiftPackageReference "FootballDataClient" */;
 			productName = FootballDataClient;
+		};
+		D811447A27CCBF2B008FB825 /* CombineExt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D811447927CCBF2B008FB825 /* XCRemoteSwiftPackageReference "CombineExt" */;
+			productName = CombineExt;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -11,15 +11,13 @@ import IdentifiedCollections
 
 struct CompetitionStandingView {
     struct State: Equatable {
-        let competitionId: Int
-        var isRequestInFlight: Bool = false
-        var competionStanding: CompetitionStanding?
+        let competionStanding: CompetitionStanding
         var selectedTeam: TeamView.State?
 
-        var standings: IdentifiedArrayOf<StandingViewState> {
+        var standings: IdentifiedArrayOf<TeamStandingViewState> {
             get {
                 IdentifiedArrayOf(
-                    uniqueElements: (competionStanding?.table ?? []).sorted(by: \.position).map(StandingViewState.init(standing:))
+                    uniqueElements: competionStanding.table.sorted(by: \.position).map(TeamStandingViewState.init(standing:))
                 )
             }
 
@@ -28,24 +26,19 @@ struct CompetitionStandingView {
     }
 
     enum Action: Equatable {
-        case viewDidLoad
-        case competitionStandingResponse(Result<CompetitionStanding, ApiError>)
-        case standingAction(id: StandingViewState.ID, action: StandingViewCell.Action)
+        case standingAction(id: TeamStandingViewState.ID, action: TeamStandingViewCell.Action)
         case selectTeam(ShortTeam?)
         case teamAction(TeamView.Action)
     }
 
-    struct Environment {
-        var apiClient: FootballDataClient
-        var mainQueue: AnySchedulerOf<DispatchQueue>
-    }
+    struct Environment {}
 
     static let reducer: Reducer<State, Action, Environment> = .combine(
-        StandingViewCell.reducer
+        TeamStandingViewCell.reducer
             .forEach(
                 state: \.standings,
                 action: /Action.standingAction,
-                environment: { _ in StandingViewCell.Environment() }
+                environment: { _ in TeamStandingViewCell.Environment() }
             ),
 
         TeamView.reducer
@@ -62,27 +55,8 @@ struct CompetitionStandingView {
             struct CompetionRequestId: Hashable {}
 
             switch action {
-            case .viewDidLoad:
-                state.isRequestInFlight = true
-
-                return environment.apiClient
-                    .fetchStanding(competitionId: state.competitionId)
-                    .receive(on: environment.mainQueue)
-                    .catchToEffect(Action.competitionStandingResponse)
-                    .cancellable(id: CompetionRequestId(), cancelInFlight: true)
-
-            case .competitionStandingResponse(.success(let standing)):
-                state.isRequestInFlight = false
-                state.competionStanding = standing
-                return .none
-
-            case .competitionStandingResponse(.failure):
-                state.isRequestInFlight = false
-                state.competionStanding = nil
-                return .none
-
             case .standingAction(let id, action: .selected):
-                guard let standing = state.competionStanding?.table.first(where: { $0.team.id == id }) else {
+                guard let standing = state.competionStanding.table.first(where: { $0.team.id == id }) else {
                     return .none
                 }
 

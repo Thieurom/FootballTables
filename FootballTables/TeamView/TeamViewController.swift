@@ -39,7 +39,6 @@ class TeamViewController: StoreViewController<TeamView.State, TeamView.ViewState
 extension TeamViewController {
     private func setupViews() {
         view.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = .black
         navigationItem.largeTitleDisplayMode = .never
 
         view.addSubview(matchesTableView)

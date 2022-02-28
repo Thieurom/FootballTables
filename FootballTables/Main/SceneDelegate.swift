@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
-            competitionStandingViewController()
+            standingDashboardViewController()
         ].map(UINavigationController.init(rootViewController:))
 
         window.rootViewController = tabBarController
@@ -65,24 +65,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 // MARK: - Private
 
 extension SceneDelegate {
-    private func competitionStandingViewController() -> CompetitionStandingViewController {
+    private func standingDashboardViewController() -> StandingDashboardViewController {
         let store = Store(
-            initialState: CompetitionStandingView.State(
-                competitionId: 2021
+            initialState: StandingDashboardView.State(
+                competitionIds: [2021, 2014, 2019, 2002, 2015]
             ),
-            reducer: CompetitionStandingView.reducer,
-            environment: CompetitionStandingView.Environment(
+            reducer: StandingDashboardView.reducer,
+            environment: StandingDashboardView.Environment(
                 apiClient: FootballDataClient(apiToken: apiToken),
                 mainQueue: .main
             )
         )
 
-        let competitionStandingViewController = CompetitionStandingViewController(store: store)
+        let standingDashboardViewController = StandingDashboardViewController(store: store)
         let tabBarItem = UITabBarItem()
-//        tabBarItem.title = "Table"
         tabBarItem.image = UIImage(systemName: "equal")
-        competitionStandingViewController.tabBarItem = tabBarItem
+        standingDashboardViewController.tabBarItem = tabBarItem
 
-        return competitionStandingViewController
+        return standingDashboardViewController
     }
 }

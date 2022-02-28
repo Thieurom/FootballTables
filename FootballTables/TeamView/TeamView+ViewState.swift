@@ -12,7 +12,7 @@ import Foundation
 extension TeamView {
     struct ViewState: StoreViewState {
         struct Section: Sectionable {
-            var items: [TeamView.ViewState.SectionItem]
+            let items: [TeamView.ViewState.SectionItem]
         }
 
         enum SectionItem: Hashable {

@@ -1,5 +1,5 @@
 //
-//  StandingViewCell.swift
+//  TeamStandingViewCell.swift
 //  FootballTables
 //
 //  Created by Doan Le Thieu on 27/02/2022.
@@ -9,8 +9,8 @@ import ComposableArchitecture
 import SnapKit
 import UIKit
 
-class StandingViewCell: StoreTableViewCell<StandingViewState, StandingViewCell.Action> {
-    static let identifier = "StandingViewCell"
+class TeamStandingViewCell: StoreTableViewCell<TeamStandingViewState, TeamStandingViewCell.Action> {
+    static let identifier = "TeamStandingViewCell"
 
     enum Action {
         case selected
@@ -18,7 +18,7 @@ class StandingViewCell: StoreTableViewCell<StandingViewState, StandingViewCell.A
 
     struct Environment {}
 
-    static let reducer = Reducer<StandingViewState, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<TeamStandingViewState, Action, Environment> { state, action, _ in
         switch action {
         case .selected:
             return .none
@@ -64,6 +64,8 @@ class StandingViewCell: StoreTableViewCell<StandingViewState, StandingViewCell.A
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Observe ViewStore
+
     override func observeViewStore() {
         guard let viewStore = viewStore else {
             return
@@ -95,13 +97,13 @@ class StandingViewCell: StoreTableViewCell<StandingViewState, StandingViewCell.A
             }
             .store(in: &cancellables)
 
-        tapGesture.addTarget(self, action: #selector(StandingViewCell.cellDidTap))
+        tapGesture.addTarget(self, action: #selector(TeamStandingViewCell.cellDidTap))
     }
 }
 
 // MARK: - Setup
 
-extension StandingViewCell {
+extension TeamStandingViewCell {
     private func setupViews() {
         let stackView = UIStackView(
             arrangedSubviews: [

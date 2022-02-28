@@ -11,22 +11,20 @@ import Foundation
 extension CompetitionStandingView {
     struct ViewState: StoreViewState {
         struct Section: Sectionable {
-            var items: [StandingViewState]
+            let items: [TeamStandingViewState]
         }
 
         let leagueName: String?
         let standings: [Section]
-        let isRequestInFlight: Bool
 
         init(state: State) {
-            self.leagueName = state.competionStanding?.competitionName
+            self.leagueName = state.competionStanding.competitionName
             self.standings = [Section(items: state.standings.map { $0 })]
-            self.isRequestInFlight = state.isRequestInFlight
         }
     }
 }
 
-struct StandingViewState: Identifiable, Hashable {
+struct TeamStandingViewState: Identifiable, Hashable {
     let id: Int
     let name: String
     let position: String
