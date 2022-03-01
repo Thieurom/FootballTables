@@ -31,7 +31,7 @@ struct TeamStandingViewState: Identifiable, Hashable {
     let points: String
     let logoUrl: URL?
 
-    init(standing: Standing) {
+    init(standing: TeamStanding) {
         self.id = standing.team.id
         self.name = standing.team.name
         self.position = "\(standing.position)"

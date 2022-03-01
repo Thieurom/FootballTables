@@ -36,7 +36,7 @@ class CompetitionStandingViewController: StoreViewController<CompetitionStanding
         super.viewDidAppear(animated)
 
         if !isMovingToParent {
-            viewStore.send(.selectTeam(nil))
+            viewStore.send(.selectTeamStanding(nil))
         }
     }
 }

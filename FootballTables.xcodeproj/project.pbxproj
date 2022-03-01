@@ -41,6 +41,8 @@
 		D811448027CCC227008FB825 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811447F27CCC227008FB825 /* Array+Extensions.swift */; };
 		D811448227CCC94B008FB825 /* StandingDashboardView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448127CCC94B008FB825 /* StandingDashboardView+ViewState.swift */; };
 		D811448427CCCA17008FB825 /* StandingDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448327CCCA17008FB825 /* StandingDashboardViewController.swift */; };
+		D811448727CDCF74008FB825 /* MatchViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448627CDCF74008FB825 /* MatchViewState.swift */; };
+		D811448927CDCF8B008FB825 /* MatchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448827CDCF8B008FB825 /* MatchViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		D811447F27CCC227008FB825 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		D811448127CCC94B008FB825 /* StandingDashboardView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StandingDashboardView+ViewState.swift"; sourceTree = "<group>"; };
 		D811448327CCCA17008FB825 /* StandingDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingDashboardViewController.swift; sourceTree = "<group>"; };
+		D811448627CDCF74008FB825 /* MatchViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewState.swift; sourceTree = "<group>"; };
+		D811448827CDCF8B008FB825 /* MatchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,7 @@
 				D811444D27CBBEA8008FB825 /* ComposableExtensions */,
 				D811446427CBC25A008FB825 /* Extensions */,
 				D811446F27CBC484008FB825 /* Main */,
+				D811448A27CDCF8F008FB825 /* MatchViewCell */,
 				D811446E27CBC479008FB825 /* Resources */,
 				D811447227CBC892008FB825 /* Secrets */,
 				D811447E27CCC01C008FB825 /* StandingDashboardView */,
@@ -267,6 +272,15 @@
 				D811448327CCCA17008FB825 /* StandingDashboardViewController.swift */,
 			);
 			path = StandingDashboardView;
+			sourceTree = "<group>";
+		};
+		D811448A27CDCF8F008FB825 /* MatchViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D811448627CDCF74008FB825 /* MatchViewState.swift */,
+				D811448827CDCF8B008FB825 /* MatchViewCell.swift */,
+			);
+			path = MatchViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D811448727CDCF74008FB825 /* MatchViewState.swift in Sources */,
 				D811445227CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift in Sources */,
 				D811447D27CCC013008FB825 /* StandingDashboardView+Core.swift in Sources */,
 				D811447127CBC88D008FB825 /* Secrets.swift in Sources */,
@@ -437,6 +452,7 @@
 				D811444C27CBBE75008FB825 /* StoreTableViewCell.swift in Sources */,
 				D811445E27CBC1B9008FB825 /* Sectionable.swift in Sources */,
 				D811446627CBC329008FB825 /* TeamViewController.swift in Sources */,
+				D811448927CDCF8B008FB825 /* MatchViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,7 +819,7 @@
 			repositoryURL = "https://github.com/Thieurom/FootballDataClient";
 			requirement = {
 				kind = exactVersion;
-				version = "0.1.0-alpha.1";
+				version = 0.2.0;
 			};
 		};
 		D811447927CCBF2B008FB825 /* XCRemoteSwiftPackageReference "CombineExt" */ = {

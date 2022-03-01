@@ -27,7 +27,7 @@ struct CompetitionStandingView {
 
     enum Action: Equatable {
         case standingAction(id: TeamStandingViewState.ID, action: TeamStandingViewCell.Action)
-        case selectTeam(ShortTeam?)
+        case selectTeamStanding(TeamStanding?)
         case teamAction(TeamView.Action)
     }
 
@@ -47,7 +47,10 @@ struct CompetitionStandingView {
                 state: \.selectedTeam,
                 action: /Action.teamAction,
                 environment: { _ in
-                    TeamView.Environment()
+                    TeamView.Environment(
+                        apiClient: FootballDataClient(apiToken: apiToken),
+                        mainQueue: .main
+                    )
                 }
             ),
 
@@ -56,15 +59,19 @@ struct CompetitionStandingView {
 
             switch action {
             case .standingAction(let id, action: .selected):
-                guard let standing = state.competionStanding.table.first(where: { $0.team.id == id }) else {
+                guard let teamStanding = state.competionStanding.table.first(where: { $0.team.id == id }) else {
                     return .none
                 }
 
-                return Effect(value: .selectTeam(standing.team))
+                return Effect(value: .selectTeamStanding(teamStanding))
 
-            case .selectTeam(let team):
-                if let team = team {
-                    state.selectedTeam = TeamView.State(team: team)
+            case .selectTeamStanding(let teamStanding):
+                if let teamStanding = teamStanding {
+                    state.selectedTeam = TeamView.State(
+                        teamStanding: teamStanding,
+                        competitionId: state.competionStanding.competitionId,
+                        competitionName: state.competionStanding.competitionName
+                    )
                 } else {
                     state.selectedTeam = nil
                 }

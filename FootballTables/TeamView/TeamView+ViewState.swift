@@ -6,7 +6,6 @@
 //
 
 import FootballDataClient
-import CombineDataSources
 import Foundation
 
 extension TeamView {
@@ -17,38 +16,58 @@ extension TeamView {
 
         enum SectionItem: Hashable {
             case team(TeamDetailViewState)
+            case match(MatchViewState)
         }
 
-        let teamName: String?
-        let teamLogoUrl: URL?
         let sections: [Section]
+        let isRequestInFlight: Bool
 
         init(state: State) {
-            self.teamName = state.team.name
-            self.teamLogoUrl = state.team.crestUrl
-            self.sections = Self.buildSections(team: state.team)
+            let finishedMatches = state.matches
+                .filter { $0.status == .finished }
+                .sorted { $0.matchDay > $1.matchDay }
+
+            self.sections = [
+                Self.buildTeamSection(teamStanding: state.teamStanding, competitionName: state.competitionName),
+                Self.buildMatchesSections(matches: finishedMatches)
+            ]
+
+            self.isRequestInFlight = state.isRequestInFlight
         }
     }
 }
 
 struct TeamDetailViewState: Identifiable, Hashable {
     let id: Int
-    let teamName: String?
+    let teamName: String
     let teamLogoUrl: URL?
-
-    init(team: ShortTeam) {
-        self.id = team.id
-        self.teamName = team.name
-        self.teamLogoUrl = team.crestUrl
-    }
+    let position: String
 }
 
 extension TeamView.ViewState {
-    fileprivate static func buildSections(team: ShortTeam) -> [Section] {
-        let teamSectionItem = SectionItem.team(TeamDetailViewState(team: team))
+    fileprivate static func buildTeamSection(teamStanding: TeamStanding, competitionName: String) -> Section {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale(identifier: "en_US")
+        numberFormatter.numberStyle = .ordinal
 
-        return [
-            .init(items: [teamSectionItem])
-        ]
+        let _position = numberFormatter.string(from: NSNumber(value: teamStanding.position))!
+        let position = "\(_position) - \(competitionName)"
+
+        let teamDetail = TeamDetailViewState(
+            id: teamStanding.team.id,
+            teamName: teamStanding.team.name,
+            teamLogoUrl: teamStanding.team.crestUrl,
+            position: position
+        )
+
+        return .init(items: [SectionItem.team(teamDetail)])
+    }
+
+    fileprivate static func buildMatchesSections(matches: [Match]) -> Section {
+        let matchesSection = matches
+            .map(MatchViewState.init(match:))
+            .map { SectionItem.match($0) }
+
+        return .init(items: matchesSection)
     }
 }

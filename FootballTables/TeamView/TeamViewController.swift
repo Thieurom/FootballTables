@@ -13,6 +13,10 @@ class TeamViewController: StoreViewController<TeamView.State, TeamView.ViewState
 
     // MARK: - Views
 
+    lazy var loadingIndicator = UIActivityIndicatorView().apply {
+        $0.hidesWhenStopped = true
+    }
+
     lazy var matchesTableView = UITableView().apply {
         $0.backgroundColor = .clear
     }
@@ -42,6 +46,7 @@ extension TeamViewController {
         navigationItem.largeTitleDisplayMode = .never
 
         view.addSubview(matchesTableView)
+        view.addSubview(loadingIndicator)
 
         matchesTableView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -50,7 +55,13 @@ extension TeamViewController {
             make.bottom.equalToSuperview()
         }
 
+        loadingIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+
         matchesTableView.register(TeamDetailViewCell.self, forCellReuseIdentifier: TeamDetailViewCell.identifier)
+        matchesTableView.register(MatchViewCell.self, forCellReuseIdentifier: MatchViewCell.identifier)
     }
 
     private func setupDataSource() {
@@ -68,6 +79,19 @@ extension TeamViewController {
                     )
 
                 return cell
+
+            case .match(let match):
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchViewCell.identifier, for: indexPath) as? MatchViewCell else {
+                    fatalError("Failed to dequeue cell of `MatchViewCell`")
+                }
+
+                cell.store = self?.store
+                    .actionless
+                    .scope(
+                        state: { _ in match }
+                    )
+
+                return cell
             }
         }
 
@@ -79,6 +103,17 @@ extension TeamViewController {
 
 extension TeamViewController {
     private func observeViewStore() {
+        viewStore.publisher
+            .isRequestInFlight
+            .sink { [weak self] in
+                if $0 {
+                    self?.loadingIndicator.startAnimating()
+                } else {
+                    self?.loadingIndicator.stopAnimating()
+                }
+            }
+            .store(in: &cancellables)
+        
         viewStore.publisher
             .sections
             .map(\.snapshot)

@@ -24,6 +24,14 @@ class TeamDetailViewCell: StoreTableViewCell<TeamDetailViewState, Never> {
         $0.lineBreakMode = .byWordWrapping
     }
 
+    lazy var positionLabel = UILabel().apply {
+        $0.numberOfLines = 1
+        $0.font = .systemFont(ofSize: 18, weight: .semibold)
+        $0.textColor = .darkGray
+        $0.textAlignment = .center
+        $0.minimumScaleFactor = 0.75
+    }
+
     // MARK: - Life cycle
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -53,7 +61,14 @@ class TeamDetailViewCell: StoreTableViewCell<TeamDetailViewState, Never> {
 
         viewStore.publisher
             .teamName
+            .map(Optional.some)
             .assign(to: \.text, on: teamNameLabel)
+            .store(in: &cancellables)
+
+        viewStore.publisher
+            .position
+            .map(Optional.some)
+            .assign(to: \.text, on: positionLabel)
             .store(in: &cancellables)
     }
 }
@@ -64,7 +79,7 @@ extension TeamDetailViewCell {
     private func setupViews() {
         selectionStyle = .none
 
-        [teamLogoView, teamNameLabel]
+        [teamLogoView, teamNameLabel, positionLabel]
             .forEach(contentView.addSubview)
 
         teamLogoView.snp.makeConstraints { make in
@@ -79,7 +94,14 @@ extension TeamDetailViewCell {
             make.leading.greaterThanOrEqualToSuperview().offset(24)
             make.trailing.lessThanOrEqualToSuperview().offset(-24)
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-12)
+        }
+
+        positionLabel.snp.makeConstraints { make in
+            make.top.equalTo(teamNameLabel.snp.bottom).offset(12)
+            make.leading.greaterThanOrEqualToSuperview()
+            make.trailing.lessThanOrEqualToSuperview()
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-24)
         }
 
         teamNameLabel.snp.contentHuggingVerticalPriority = UILayoutPriority.defaultLow.rawValue + 1

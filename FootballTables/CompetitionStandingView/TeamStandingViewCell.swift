@@ -29,7 +29,7 @@ class TeamStandingViewCell: StoreTableViewCell<TeamStandingViewState, TeamStandi
 
     lazy var positionLabel = UILabel().apply {
         $0.numberOfLines = 1
-        $0.font = .systemFont(ofSize: 14, weight: .semibold)
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.textColor = .gray
         $0.textAlignment = .right
     }
@@ -38,7 +38,7 @@ class TeamStandingViewCell: StoreTableViewCell<TeamStandingViewState, TeamStandi
 
     lazy var teamNameLabel = UILabel().apply {
         $0.numberOfLines = 1
-        $0.font = .systemFont(ofSize: 16, weight: .semibold)
+        $0.font = .systemFont(ofSize: 16, weight: .medium)
         $0.textColor = .black
         $0.textAlignment = .left
     }
