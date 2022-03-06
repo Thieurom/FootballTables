@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8102EF827D46E5E00227A21 /* MyTeamsDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8102EF727D46E5E00227A21 /* MyTeamsDashboardViewController.swift */; };
+		D8102EFB27D46E7A00227A21 /* MyTeamsDashboardView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8102EFA27D46E7A00227A21 /* MyTeamsDashboardView+Core.swift */; };
+		D8102EFD27D46E8300227A21 /* MyTeamsDashboardView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8102EFC27D46E8300227A21 /* MyTeamsDashboardView+ViewState.swift */; };
+		D8102EFF27D4F83500227A21 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8102EFE27D4F83500227A21 /* App.swift */; };
+		D8102F0127D4FFE800227A21 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8102F0027D4FFE800227A21 /* MainViewController.swift */; };
 		D811440F27CBBAC2008FB825 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811440E27CBBAC2008FB825 /* AppDelegate.swift */; };
 		D811441127CBBAC2008FB825 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811441027CBBAC2008FB825 /* SceneDelegate.swift */; };
 		D811441827CBBAC4008FB825 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D811441727CBBAC4008FB825 /* Assets.xcassets */; };
@@ -73,6 +78,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D8102EF727D46E5E00227A21 /* MyTeamsDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamsDashboardViewController.swift; sourceTree = "<group>"; };
+		D8102EFA27D46E7A00227A21 /* MyTeamsDashboardView+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyTeamsDashboardView+Core.swift"; sourceTree = "<group>"; };
+		D8102EFC27D46E8300227A21 /* MyTeamsDashboardView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyTeamsDashboardView+ViewState.swift"; sourceTree = "<group>"; };
+		D8102EFE27D4F83500227A21 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		D8102F0027D4FFE800227A21 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D811440B27CBBAC2008FB825 /* FootballTables.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootballTables.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D811440E27CBBAC2008FB825 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D811441027CBBAC2008FB825 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +160,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D8102EF927D46E6500227A21 /* MyTeamsDashboardView */ = {
+			isa = PBXGroup;
+			children = (
+				D8102EFA27D46E7A00227A21 /* MyTeamsDashboardView+Core.swift */,
+				D8102EFC27D46E8300227A21 /* MyTeamsDashboardView+ViewState.swift */,
+				D8102EF727D46E5E00227A21 /* MyTeamsDashboardViewController.swift */,
+			);
+			path = MyTeamsDashboardView;
+			sourceTree = "<group>";
+		};
 		D811440227CBBAC2008FB825 = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +207,7 @@
 				D811447E27CCC01C008FB825 /* StandingDashboardView */,
 				D811446D27CBC43B008FB825 /* TeamView */,
 				D89EA49227D372C600B8DAB3 /* CompetitionViewCell */,
+				D8102EF927D46E6500227A21 /* MyTeamsDashboardView */,
 			);
 			path = FootballTables;
 			sourceTree = "<group>";
@@ -276,6 +297,8 @@
 				D811440E27CBBAC2008FB825 /* AppDelegate.swift */,
 				D811441027CBBAC2008FB825 /* SceneDelegate.swift */,
 				D8CC2DB127D315F300EC3FDE /* Theme.swift */,
+				D8102EFE27D4F83500227A21 /* App.swift */,
+				D8102F0027D4FFE800227A21 /* MainViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -490,12 +513,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8102EFF27D4F83500227A21 /* App.swift in Sources */,
 				D811448727CDCF74008FB825 /* MatchViewState.swift in Sources */,
 				D811445227CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift in Sources */,
+				D8102EF827D46E5E00227A21 /* MyTeamsDashboardViewController.swift in Sources */,
 				D811447D27CCC013008FB825 /* StandingDashboardView+Core.swift in Sources */,
 				D811448F27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift in Sources */,
 				D811447127CBC88D008FB825 /* Secrets.swift in Sources */,
 				D811444A27CBBE59008FB825 /* StoreViewController.swift in Sources */,
+				D8102EFD27D46E8300227A21 /* MyTeamsDashboardView+ViewState.swift in Sources */,
 				D8CC2DAC27D2FD8E00EC3FDE /* MatchDashboardView+ViewState.swift in Sources */,
 				D89EA49427D374CC00B8DAB3 /* CompetitionViewState.swift in Sources */,
 				D811446327CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift in Sources */,
@@ -510,6 +536,7 @@
 				D8CC2DB227D315F300EC3FDE /* Theme.swift in Sources */,
 				D811447827CBD699008FB825 /* Sequence+Extensions.swift in Sources */,
 				D811448427CCCA17008FB825 /* StandingDashboardViewController.swift in Sources */,
+				D8102EFB27D46E7A00227A21 /* MyTeamsDashboardView+Core.swift in Sources */,
 				D811446C27CBC418008FB825 /* TeamDetailViewCell.swift in Sources */,
 				D8CC2DA927D2FD7000EC3FDE /* MatchDashboardView+Core.swift in Sources */,
 				D8CC2DAE27D2FD9B00EC3FDE /* MatchDashboardViewController.swift in Sources */,
@@ -525,6 +552,7 @@
 				D811445E27CBC1B9008FB825 /* Sectionable.swift in Sources */,
 				D811446627CBC329008FB825 /* TeamViewController.swift in Sources */,
 				D811448927CDCF8B008FB825 /* MatchViewCell.swift in Sources */,
+				D8102F0127D4FFE800227A21 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
