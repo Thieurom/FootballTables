@@ -1,0 +1,13 @@
+# FootballTables [WIP]
+A simple iOS app shows the latest matches and standings of Europe's top 5 leagues.
+
+## Screens
+|Matches|Standings|
+|-------|---------|
+|![](./github/matches.png?raw=true)|![](./github/standings.png?raw=true)|
+
+## Architecture
+[The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) with UIKit.
+
+## API
+[Football-data.org](https://www.football-data.org) via [FootballDataClient](https://github.com/Thieurom/FootballDataClient) library.
