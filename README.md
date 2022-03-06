@@ -4,7 +4,7 @@ A simple iOS app shows the latest matches and standings of Europe's top 5 league
 ## Screens
 |Matches|Standings|
 |-------|---------|
-|![](./github/matches.png?raw=true)|![](./github/standings.png?raw=true)|
+|![](./.github/matches.png?raw=true)|![](./.github/standings.png?raw=true)|
 
 ## Architecture
 [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) with UIKit.
