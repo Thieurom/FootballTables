@@ -9,8 +9,23 @@ import ComposableArchitecture
 import SnapKit
 import UIKit
 
-class MatchViewCell: StoreTableViewCell<MatchViewState, Never> {
+class MatchViewCell: StoreTableViewCell<MatchViewState, MatchViewCell.Action> {
     static let identifier = "MatchViewCell"
+
+    // MARK: - Core
+
+    enum Action {
+        case selected
+    }
+
+    struct Environment {}
+
+    static let reducer = Reducer<MatchViewState, Action, Environment> { state, action, _ in
+        switch action {
+        case .selected:
+            return .none
+        }
+    }
 
     // MARK: - Subviews
 
@@ -23,6 +38,7 @@ class MatchViewCell: StoreTableViewCell<MatchViewState, Never> {
 
     lazy var homeTeamNameLabel = UILabel().apply {
         $0.numberOfLines = 2
+        $0.lineBreakMode = .byWordWrapping
         $0.font = .systemFont(ofSize: 16, weight: .medium)
         $0.textColor = .black
         $0.textAlignment = .center
@@ -30,6 +46,7 @@ class MatchViewCell: StoreTableViewCell<MatchViewState, Never> {
 
     lazy var awayTeamNameLabel = UILabel().apply {
         $0.numberOfLines = 2
+        $0.lineBreakMode = .byWordWrapping
         $0.font = .systemFont(ofSize: 16, weight: .medium)
         $0.textColor = .black
         $0.textAlignment = .center
@@ -42,6 +59,8 @@ class MatchViewCell: StoreTableViewCell<MatchViewState, Never> {
         $0.textAlignment = .center
         $0.minimumScaleFactor = 0.75
     }
+
+    private lazy var tapGesture = UITapGestureRecognizer()
 
     // MARK: - Life cycle
 
@@ -83,6 +102,8 @@ class MatchViewCell: StoreTableViewCell<MatchViewState, Never> {
             .map(Optional.some)
             .assign(to: \.text, on: scoreLabel)
             .store(in: &cancellables)
+
+        tapGesture.addTarget(self, action: #selector(MatchViewCell.cellDidTap))
     }
 }
 
@@ -131,6 +152,14 @@ extension MatchViewCell {
 
         homeTeamNameLabel.snp.makeConstraints { make in
             make.width.equalTo(awayTeamNameLabel)
+        }
+
+        contentView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func cellDidTap() {
+        if let viewStore = viewStore {
+            viewStore.send(.selected)
         }
     }
 }

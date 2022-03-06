@@ -86,9 +86,14 @@ extension TeamViewController {
                 }
 
                 cell.store = self?.store
-                    .actionless
                     .scope(
-                        state: { _ in match }
+                        state: { _ in match },
+                        action: {
+                            TeamView.Action.matchAction(
+                                id: match.id,
+                                action: $0
+                            )
+                        }
                     )
 
                 return cell

@@ -28,7 +28,10 @@ extension TeamView {
                 .sorted { $0.matchDay > $1.matchDay }
 
             self.sections = [
-                Self.buildTeamSection(teamStanding: state.teamStanding, competitionName: state.competitionName),
+                Self.buildTeamSection(
+                    teamStanding: state.teamStanding,
+                    competitionName: state.competition.name
+                ),
                 Self.buildMatchesSections(matches: finishedMatches)
             ]
 
@@ -65,7 +68,7 @@ extension TeamView.ViewState {
 
     fileprivate static func buildMatchesSections(matches: [Match]) -> Section {
         let matchesSection = matches
-            .map(MatchViewState.init(match:))
+            .map(MatchViewState.init)
             .map { SectionItem.match($0) }
 
         return .init(items: matchesSection)

@@ -14,7 +14,9 @@ class TeamDetailViewCell: StoreTableViewCell<TeamDetailViewState, Never> {
 
     // MARK: - Subviews
 
-    lazy var teamLogoView = UIImageView()
+    lazy var teamLogoView = UIImageView().apply {
+        $0.contentMode = .scaleAspectFit
+    }
 
     lazy var teamNameLabel = UILabel().apply {
         $0.numberOfLines = 0

@@ -5,6 +5,7 @@
 //  Created by Doan Le Thieu on 28/02/2022.
 //
 
+import CombineExt
 import ComposableArchitecture
 import SnapKit
 import UIKit
@@ -52,7 +53,7 @@ class StandingDashboardViewController: StoreViewController<StandingDashboardView
 extension StandingDashboardViewController {
     private func setupViews() {
         // Style
-        view.backgroundColor = .white
+        view.backgroundColor = .theme
         navigationController?.navigationBar.prefersLargeTitles = true
 
         // Layout
@@ -71,6 +72,7 @@ extension StandingDashboardViewController {
             make.centerY.equalToSuperview()
         }
 
+        standingTableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         standingTableView.register(TeamStandingViewCell.self, forCellReuseIdentifier: TeamStandingViewCell.identifier)
         standingTableView.delegate = self
     }
@@ -105,18 +107,28 @@ extension StandingDashboardViewController {
                 let competitionStandingViewController = CompetitionStandingViewController(store: store)
                 self?.navigationController?.pushViewController(competitionStandingViewController, animated: true)
             } else: { [weak self] in
-                if let _ = self?.navigationController?.topViewController as? CompetitionStandingViewController {
-                    self?.navigationController?.popViewController(animated: true)
-                }
+                guard let self = self else { return }
+                self.navigationController?.popToViewController(self, animated: true)
             }
             .store(in: &cancellables)
     }
 }
 
+// MARK: - UITableViewDelegate
+
 extension StandingDashboardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UITableViewHeaderFooterView()
-        headerView.textLabel?.text = viewStore.standingItems[section].header
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderView.identifier) as? SectionHeaderView ?? SectionHeaderView(reuseIdentifier: SectionHeaderView.identifier)
+
+        // No reactive here!
+        let viewSection = viewStore.sections[section]
+        headerView.titleLabel.text = viewSection.header
+        headerView.actionButton.setTitle(viewSection.subtitle, for: .normal)
+
+        headerView.actionButton.addAction(UIAction { [weak self] _ in
+            self?.viewStore.send(.selectSectionHeader(section))
+        }, for: .touchUpInside)
+
         return headerView
     }
 }
@@ -128,7 +140,7 @@ extension StandingDashboardViewController {
         viewStore.publisher
             .title
             .map(Optional.some)
-            .assign(to: \.title, on: self)
+            .assign(to: \.title, on: self, ownership: .weak)
             .store(in: &cancellables)
 
         viewStore.publisher
@@ -143,7 +155,7 @@ extension StandingDashboardViewController {
             .store(in: &cancellables)
 
         viewStore.publisher
-            .standingItems
+            .sections
             .map(\.snapshot)
             .assign(to: \.snapshot, on: dataSource)
             .store(in: &cancellables)

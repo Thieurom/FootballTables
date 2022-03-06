@@ -14,7 +14,7 @@ struct MatchViewState: Identifiable, Hashable {
     let awayTeam: String
     let score: String
 
-    init(match: Match) {
+    init(_ match: Match) {
         self.id = match.id
         self.matchDay = "Match Day \(match.matchDay)"
         self.homeTeam = match.homeTeam.name

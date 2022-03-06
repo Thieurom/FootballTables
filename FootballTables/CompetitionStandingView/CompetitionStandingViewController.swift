@@ -74,7 +74,10 @@ extension CompetitionStandingViewController {
                 .scope(
                     state: { _ in itemState },
                     action: {
-                        CompetitionStandingView.Action.standingAction(id: itemState.id, action: $0)
+                        CompetitionStandingView.Action.standingAction(
+                            id: itemState.id,
+                            action: $0
+                        )
                     }
                 )
 
@@ -94,9 +97,8 @@ extension CompetitionStandingViewController {
                 let teamViewController = TeamViewController(store: store)
                 self?.navigationController?.pushViewController(teamViewController, animated: true)
             } else: { [weak self] in
-                if let _ = self?.navigationController?.topViewController as? TeamViewController {
-                    self?.navigationController?.popViewController(animated: true)
-                }
+                guard let self = self else { return }
+                self.navigationController?.popToViewController(self, animated: true)
             }
             .store(in: &cancellables)
     }

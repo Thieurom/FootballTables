@@ -18,7 +18,7 @@ extension CompetitionStandingView {
         let standings: [Section]
 
         init(state: State) {
-            self.leagueName = state.competionStanding.competitionName
+            self.leagueName = state.competionStanding.competition.name
             self.standings = [Section(items: state.standings.map { $0 })]
         }
     }
@@ -31,7 +31,7 @@ struct TeamStandingViewState: Identifiable, Hashable {
     let points: String
     let logoUrl: URL?
 
-    init(standing: TeamStanding) {
+    init(_ standing: TeamStanding) {
         self.id = standing.team.id
         self.name = standing.team.name
         self.position = "\(standing.position)"

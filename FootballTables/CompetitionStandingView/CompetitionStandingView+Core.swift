@@ -12,12 +12,17 @@ import IdentifiedCollections
 struct CompetitionStandingView {
     struct State: Equatable {
         let competionStanding: CompetitionStanding
+
+        // Child states
+
         var selectedTeam: TeamView.State?
 
         var standings: IdentifiedArrayOf<TeamStandingViewState> {
             get {
                 IdentifiedArrayOf(
-                    uniqueElements: competionStanding.table.sorted(by: \.position).map(TeamStandingViewState.init(standing:))
+                    uniqueElements: competionStanding.table
+                        .sorted(by: \.position)
+                        .map(TeamStandingViewState.init)
                 )
             }
 
@@ -26,8 +31,10 @@ struct CompetitionStandingView {
     }
 
     enum Action: Equatable {
-        case standingAction(id: TeamStandingViewState.ID, action: TeamStandingViewCell.Action)
         case selectTeamStanding(TeamStanding?)
+
+        // Child actions
+        case standingAction(id: TeamStandingViewState.ID, action: TeamStandingViewCell.Action)
         case teamAction(TeamView.Action)
     }
 
@@ -68,9 +75,8 @@ struct CompetitionStandingView {
             case .selectTeamStanding(let teamStanding):
                 if let teamStanding = teamStanding {
                     state.selectedTeam = TeamView.State(
-                        teamStanding: teamStanding,
-                        competitionId: state.competionStanding.competitionId,
-                        competitionName: state.competionStanding.competitionName
+                        competition: state.competionStanding.competition,
+                        teamStanding: teamStanding
                     )
                 } else {
                     state.selectedTeam = nil

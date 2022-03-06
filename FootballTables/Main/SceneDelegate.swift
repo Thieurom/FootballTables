@@ -11,8 +11,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    // TODO: TEMP
-    let premierLeagueId = 2021
+    let competitionIds = [2021, 2014, 2019, 2002, 2015]
 
     var window: UIWindow?
 
@@ -22,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
 
         let tabBarController = UITabBarController()
+
         tabBarController.viewControllers = [
+            matchDashboardViewController(),
             standingDashboardViewController()
         ].map(UINavigationController.init(rootViewController:))
 
@@ -58,17 +59,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 
 // MARK: - Private
 
 extension SceneDelegate {
+    private func matchDashboardViewController() -> MatchDashboardViewController {
+        let store = Store(
+            initialState: MatchDashboardView.State(
+                competitionIds: competitionIds
+            ),
+            reducer: MatchDashboardView.reducer,
+            environment: MatchDashboardView.Environment(
+                apiClient: FootballDataClient(apiToken: apiToken),
+                mainQueue: .main
+            )
+        )
+
+        let matchDashboardViewController = MatchDashboardViewController(store: store)
+        let tabBarItem = UITabBarItem()
+        tabBarItem.image = UIImage(systemName: "square")
+        tabBarItem.title = "Matches"
+        matchDashboardViewController.tabBarItem = tabBarItem
+
+        return matchDashboardViewController
+    }
+
     private func standingDashboardViewController() -> StandingDashboardViewController {
         let store = Store(
             initialState: StandingDashboardView.State(
-                competitionIds: [2021, 2014, 2019, 2002, 2015]
+                competitionIds: competitionIds
             ),
             reducer: StandingDashboardView.reducer,
             environment: StandingDashboardView.Environment(
@@ -79,7 +99,8 @@ extension SceneDelegate {
 
         let standingDashboardViewController = StandingDashboardViewController(store: store)
         let tabBarItem = UITabBarItem()
-        tabBarItem.image = UIImage(systemName: "equal")
+        tabBarItem.image = UIImage(systemName: "arrowtriangle.up")
+        tabBarItem.title = "Standings"
         standingDashboardViewController.tabBarItem = tabBarItem
 
         return standingDashboardViewController

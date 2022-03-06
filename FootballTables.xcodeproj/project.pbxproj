@@ -43,6 +43,16 @@
 		D811448427CCCA17008FB825 /* StandingDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448327CCCA17008FB825 /* StandingDashboardViewController.swift */; };
 		D811448727CDCF74008FB825 /* MatchViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448627CDCF74008FB825 /* MatchViewState.swift */; };
 		D811448927CDCF8B008FB825 /* MatchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448827CDCF8B008FB825 /* MatchViewCell.swift */; };
+		D811448C27CFA315008FB825 /* CompetitionMatchView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448B27CFA315008FB825 /* CompetitionMatchView+Core.swift */; };
+		D811448F27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448E27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift */; };
+		D811449127CFA33C008FB825 /* CompetitionMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811449027CFA33C008FB825 /* CompetitionMatchViewController.swift */; };
+		D89EA49127D372A400B8DAB3 /* CompetitionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EA49027D372A400B8DAB3 /* CompetitionViewCell.swift */; };
+		D89EA49427D374CC00B8DAB3 /* CompetitionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EA49327D374CC00B8DAB3 /* CompetitionViewState.swift */; };
+		D8CC2DA927D2FD7000EC3FDE /* MatchDashboardView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC2DA827D2FD7000EC3FDE /* MatchDashboardView+Core.swift */; };
+		D8CC2DAC27D2FD8E00EC3FDE /* MatchDashboardView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC2DAB27D2FD8E00EC3FDE /* MatchDashboardView+ViewState.swift */; };
+		D8CC2DAE27D2FD9B00EC3FDE /* MatchDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC2DAD27D2FD9B00EC3FDE /* MatchDashboardViewController.swift */; };
+		D8CC2DB027D3080200EC3FDE /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC2DAF27D3080200EC3FDE /* SectionHeaderView.swift */; };
+		D8CC2DB227D315F300EC3FDE /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC2DB127D315F300EC3FDE /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +108,16 @@
 		D811448327CCCA17008FB825 /* StandingDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingDashboardViewController.swift; sourceTree = "<group>"; };
 		D811448627CDCF74008FB825 /* MatchViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewState.swift; sourceTree = "<group>"; };
 		D811448827CDCF8B008FB825 /* MatchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewCell.swift; sourceTree = "<group>"; };
+		D811448B27CFA315008FB825 /* CompetitionMatchView+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionMatchView+Core.swift"; sourceTree = "<group>"; };
+		D811448E27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionMatchView+ViewState.swift"; sourceTree = "<group>"; };
+		D811449027CFA33C008FB825 /* CompetitionMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionMatchViewController.swift; sourceTree = "<group>"; };
+		D89EA49027D372A400B8DAB3 /* CompetitionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewCell.swift; sourceTree = "<group>"; };
+		D89EA49327D374CC00B8DAB3 /* CompetitionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewState.swift; sourceTree = "<group>"; };
+		D8CC2DA827D2FD7000EC3FDE /* MatchDashboardView+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchDashboardView+Core.swift"; sourceTree = "<group>"; };
+		D8CC2DAB27D2FD8E00EC3FDE /* MatchDashboardView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchDashboardView+ViewState.swift"; sourceTree = "<group>"; };
+		D8CC2DAD27D2FD9B00EC3FDE /* MatchDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDashboardViewController.swift; sourceTree = "<group>"; };
+		D8CC2DAF27D3080200EC3FDE /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		D8CC2DB127D315F300EC3FDE /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,15 +174,19 @@
 			isa = PBXGroup;
 			children = (
 				D811445F27CBC1F6008FB825 /* Common */,
+				D811448D27CFA31E008FB825 /* CompetitionMatchView */,
 				D811445027CBBED9008FB825 /* CompetitionStandingView */,
 				D811444D27CBBEA8008FB825 /* ComposableExtensions */,
 				D811446427CBC25A008FB825 /* Extensions */,
 				D811446F27CBC484008FB825 /* Main */,
+				D8CC2DAA27D2FD8000EC3FDE /* MatchDashboardView */,
 				D811448A27CDCF8F008FB825 /* MatchViewCell */,
 				D811446E27CBC479008FB825 /* Resources */,
 				D811447227CBC892008FB825 /* Secrets */,
+				D89EA48F27D341CF00B8DAB3 /* SectionHeaderView */,
 				D811447E27CCC01C008FB825 /* StandingDashboardView */,
 				D811446D27CBC43B008FB825 /* TeamView */,
+				D89EA49227D372C600B8DAB3 /* CompetitionViewCell */,
 			);
 			path = FootballTables;
 			sourceTree = "<group>";
@@ -251,6 +275,7 @@
 			children = (
 				D811440E27CBBAC2008FB825 /* AppDelegate.swift */,
 				D811441027CBBAC2008FB825 /* SceneDelegate.swift */,
+				D8CC2DB127D315F300EC3FDE /* Theme.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -281,6 +306,43 @@
 				D811448827CDCF8B008FB825 /* MatchViewCell.swift */,
 			);
 			path = MatchViewCell;
+			sourceTree = "<group>";
+		};
+		D811448D27CFA31E008FB825 /* CompetitionMatchView */ = {
+			isa = PBXGroup;
+			children = (
+				D811448B27CFA315008FB825 /* CompetitionMatchView+Core.swift */,
+				D811448E27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift */,
+				D811449027CFA33C008FB825 /* CompetitionMatchViewController.swift */,
+			);
+			path = CompetitionMatchView;
+			sourceTree = "<group>";
+		};
+		D89EA48F27D341CF00B8DAB3 /* SectionHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				D8CC2DAF27D3080200EC3FDE /* SectionHeaderView.swift */,
+			);
+			path = SectionHeaderView;
+			sourceTree = "<group>";
+		};
+		D89EA49227D372C600B8DAB3 /* CompetitionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D89EA49027D372A400B8DAB3 /* CompetitionViewCell.swift */,
+				D89EA49327D374CC00B8DAB3 /* CompetitionViewState.swift */,
+			);
+			path = CompetitionViewCell;
+			sourceTree = "<group>";
+		};
+		D8CC2DAA27D2FD8000EC3FDE /* MatchDashboardView */ = {
+			isa = PBXGroup;
+			children = (
+				D8CC2DA827D2FD7000EC3FDE /* MatchDashboardView+Core.swift */,
+				D8CC2DAB27D2FD8E00EC3FDE /* MatchDashboardView+ViewState.swift */,
+				D8CC2DAD27D2FD9B00EC3FDE /* MatchDashboardViewController.swift */,
+			);
+			path = MatchDashboardView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -431,9 +493,13 @@
 				D811448727CDCF74008FB825 /* MatchViewState.swift in Sources */,
 				D811445227CBBEEA008FB825 /* CompetitionStandingView+ViewState.swift in Sources */,
 				D811447D27CCC013008FB825 /* StandingDashboardView+Core.swift in Sources */,
+				D811448F27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift in Sources */,
 				D811447127CBC88D008FB825 /* Secrets.swift in Sources */,
 				D811444A27CBBE59008FB825 /* StoreViewController.swift in Sources */,
+				D8CC2DAC27D2FD8E00EC3FDE /* MatchDashboardView+ViewState.swift in Sources */,
+				D89EA49427D374CC00B8DAB3 /* CompetitionViewState.swift in Sources */,
 				D811446327CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift in Sources */,
+				D89EA49127D372A400B8DAB3 /* CompetitionViewCell.swift in Sources */,
 				D811444F27CBBECC008FB825 /* CompetitionStandingView+Core.swift in Sources */,
 				D811444827CBBE43008FB825 /* StoreViewState.swift in Sources */,
 				D811445627CBBF27008FB825 /* TeamStandingViewCell.swift in Sources */,
@@ -441,13 +507,19 @@
 				D811446127CBC212008FB825 /* Array+Sectionable.swift in Sources */,
 				D811448027CCC227008FB825 /* Array+Extensions.swift in Sources */,
 				D811445427CBBF19008FB825 /* CompetitionStandingViewController.swift in Sources */,
+				D8CC2DB227D315F300EC3FDE /* Theme.swift in Sources */,
 				D811447827CBD699008FB825 /* Sequence+Extensions.swift in Sources */,
 				D811448427CCCA17008FB825 /* StandingDashboardViewController.swift in Sources */,
 				D811446C27CBC418008FB825 /* TeamDetailViewCell.swift in Sources */,
+				D8CC2DA927D2FD7000EC3FDE /* MatchDashboardView+Core.swift in Sources */,
+				D8CC2DAE27D2FD9B00EC3FDE /* MatchDashboardViewController.swift in Sources */,
+				D811449127CFA33C008FB825 /* CompetitionMatchViewController.swift in Sources */,
 				D811440F27CBBAC2008FB825 /* AppDelegate.swift in Sources */,
 				D811441127CBBAC2008FB825 /* SceneDelegate.swift in Sources */,
 				D811448227CCC94B008FB825 /* StandingDashboardView+ViewState.swift in Sources */,
 				D811445C27CBC146008FB825 /* Applicable.swift in Sources */,
+				D811448C27CFA315008FB825 /* CompetitionMatchView+Core.swift in Sources */,
+				D8CC2DB027D3080200EC3FDE /* SectionHeaderView.swift in Sources */,
 				D811446A27CBC400008FB825 /* TeamView+ViewState.swift in Sources */,
 				D811444C27CBBE75008FB825 /* StoreTableViewCell.swift in Sources */,
 				D811445E27CBC1B9008FB825 /* Sectionable.swift in Sources */,
@@ -818,8 +890,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Thieurom/FootballDataClient";
 			requirement = {
-				kind = exactVersion;
-				version = 0.2.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
 			};
 		};
 		D811447927CCBF2B008FB825 /* XCRemoteSwiftPackageReference "CombineExt" */ = {

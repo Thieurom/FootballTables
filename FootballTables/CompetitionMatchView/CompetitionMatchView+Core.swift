@@ -1,18 +1,17 @@
 //
-//  TeamView+Core.swift
+//  CompetitionMatchView+Core.swift
 //  FootballTables
 //
-//  Created by Doan Le Thieu on 27/02/2022.
+//  Created by Doan Le Thieu on 02/03/2022.
 //
 
 import ComposableArchitecture
 import FootballDataClient
 
-struct TeamView {
+struct CompetitionMatchView {
     struct State: Equatable {
         let competition: Competition
-        let teamStanding: TeamStanding
-        var matches = [Match]()
+        var matches: [Match] = []
         var isRequestInFlight: Bool = false
     }
 
@@ -33,13 +32,9 @@ struct TeamView {
         switch action {
         case .viewDidLoad:
             state.isRequestInFlight = true
-            let teamId = state.teamStanding.team.id
-            let competition = state.competition
-
             return environment.apiClient
-                .fetchMatches(teamId: teamId)
+                .fetchMatches(competitionId: state.competition.id)
                 .receive(on: environment.mainQueue)
-                .map { $0.filter { $0.competition == competition } }
                 .catchToEffect(Action.matchesResponse)
 
         case .matchesResponse(.success(let matches)):

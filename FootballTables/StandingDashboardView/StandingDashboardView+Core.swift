@@ -12,28 +12,33 @@ import IdentifiedCollections
 
 struct StandingDashboardView {
     struct State: Equatable {
+        struct StandingSection: Equatable {
+            let competitionStanding: CompetitionStanding
+            let standings: [TeamStanding]
+        }
+
         let competitionIds: [Int]
         var isRequestInFlight: Bool = false
         var competionStandings = [CompetitionStanding]()
 
-        var sections: IdentifiedArrayOf<ViewState.Section> {
-            return IdentifiedArrayOf(
-                uniqueElements: competionStandings
-                    .map {
-                        ViewState.Section(
-                            id: $0.competitionId,
-                            header: $0.competitionName,
-                            items: $0.table.prefix(3).map(TeamStandingViewState.init(standing:))
-                        )
-                    }
-            )
+        var standingSections: [StandingSection] {
+            return competionStandings
+                .map {
+                    StandingSection(
+                        competitionStanding: $0,
+                        standings: Array($0.table.prefix(4))
+                    )
+                }
         }
 
-        // A little bit hack?
-        var sectionItems: IdentifiedArrayOf<TeamStandingViewState> {
+        // Child states
+        
+        var teamStandingViewStates: IdentifiedArrayOf<TeamStandingViewState> {
             get {
                 IdentifiedArrayOf(
-                    uniqueElements: sections.elements.flatMap(\.items)
+                    uniqueElements: standingSections
+                        .flatMap(\.standings)
+                        .map(TeamStandingViewState.init)
                 )
             }
             set {}
@@ -46,6 +51,9 @@ struct StandingDashboardView {
         case viewDidLoad
         case competitionStandingsResponse(Result<[CompetitionStanding], ApiError>)
         case selectCompetitionStanding(CompetitionStanding?)
+        case selectSectionHeader(Int)
+
+        // Child actions
         case teamStandingAction(id: TeamStandingViewState.ID, action: TeamStandingViewCell.Action)
         case competitionStandingAction(CompetitionStandingView.Action)
     }
@@ -58,7 +66,7 @@ struct StandingDashboardView {
     static let reducer: Reducer<State, Action, Environment> = .combine(
         TeamStandingViewCell.reducer
             .forEach(
-                state: \.sectionItems,
+                state: \.teamStandingViewStates,
                 action: /Action.teamStandingAction,
                 environment: { _ in TeamStandingViewCell.Environment() }
             ),
@@ -107,13 +115,21 @@ struct StandingDashboardView {
                     }
                     return .none
 
+                case .selectSectionHeader(let section):
+                    guard (0..<state.standingSections.count) ~= section else {
+                        return .none
+                    }
+
+                    let standingSection = state.standingSections[section]
+                    return Effect(value: .selectCompetitionStanding(standingSection.competitionStanding))
+
                 case .teamStandingAction(let id, action: .selected):
                     // OMG!!!
-                    guard let competitionStanding = state.competionStandings.first(where: { $0.table.contains(where: { $0.team.id == id }) }) else {
+                    guard let section = state.standingSections.first(where: { $0.standings.contains(where: { $0.team.id == id }) }) else {
                         return .none
                     }
                     
-                    return Effect(value: .selectCompetitionStanding(competitionStanding))
+                    return Effect(value: .selectCompetitionStanding(section.competitionStanding))
 
                 case .teamStandingAction:
                     return .none
