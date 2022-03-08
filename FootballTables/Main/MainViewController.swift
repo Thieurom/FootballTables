@@ -60,7 +60,7 @@ extension MainViewController {
 
         let tabBarItems: [UITabBarItem] = [
             .init(title: "Matches", image: UIImage(systemName: "square"), selectedImage: nil),
-            .init(title: "Standings", image: UIImage(systemName: "arrowtriangle.up"), selectedImage: nil),
+            .init(title: "Standings", image: UIImage(systemName: "triangle"), selectedImage: nil),
             .init(title: "My Teams", image: UIImage(systemName: "seal"), selectedImage: nil)
         ]
 

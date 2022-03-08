@@ -12,6 +12,7 @@
 		D8102EFD27D46E8300227A21 /* MyTeamsDashboardView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8102EFC27D46E8300227A21 /* MyTeamsDashboardView+ViewState.swift */; };
 		D8102EFF27D4F83500227A21 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8102EFE27D4F83500227A21 /* App.swift */; };
 		D8102F0127D4FFE800227A21 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8102F0027D4FFE800227A21 /* MainViewController.swift */; };
+		D8102F0327D6280500227A21 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8102F0227D6280500227A21 /* AppError.swift */; };
 		D811440F27CBBAC2008FB825 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811440E27CBBAC2008FB825 /* AppDelegate.swift */; };
 		D811441127CBBAC2008FB825 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811441027CBBAC2008FB825 /* SceneDelegate.swift */; };
 		D811441827CBBAC4008FB825 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D811441727CBBAC4008FB825 /* Assets.xcassets */; };
@@ -51,6 +52,9 @@
 		D811448C27CFA315008FB825 /* CompetitionMatchView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448B27CFA315008FB825 /* CompetitionMatchView+Core.swift */; };
 		D811448F27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811448E27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift */; };
 		D811449127CFA33C008FB825 /* CompetitionMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811449027CFA33C008FB825 /* CompetitionMatchViewController.swift */; };
+		D884E50527D62958006EAD05 /* UIActivityIndicatorView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884E50427D62958006EAD05 /* UIActivityIndicatorView+Extensions.swift */; };
+		D884E50727D62DEC006EAD05 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884E50627D62DEC006EAD05 /* MessageView.swift */; };
+		D884E50927D7B00C006EAD05 /* RoundedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884E50827D7B00C006EAD05 /* RoundedButtonStyle.swift */; };
 		D89EA49127D372A400B8DAB3 /* CompetitionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EA49027D372A400B8DAB3 /* CompetitionViewCell.swift */; };
 		D89EA49427D374CC00B8DAB3 /* CompetitionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89EA49327D374CC00B8DAB3 /* CompetitionViewState.swift */; };
 		D8CC2DA927D2FD7000EC3FDE /* MatchDashboardView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC2DA827D2FD7000EC3FDE /* MatchDashboardView+Core.swift */; };
@@ -83,6 +87,7 @@
 		D8102EFC27D46E8300227A21 /* MyTeamsDashboardView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyTeamsDashboardView+ViewState.swift"; sourceTree = "<group>"; };
 		D8102EFE27D4F83500227A21 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		D8102F0027D4FFE800227A21 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D8102F0227D6280500227A21 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		D811440B27CBBAC2008FB825 /* FootballTables.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootballTables.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D811440E27CBBAC2008FB825 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D811441027CBBAC2008FB825 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +126,9 @@
 		D811448B27CFA315008FB825 /* CompetitionMatchView+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionMatchView+Core.swift"; sourceTree = "<group>"; };
 		D811448E27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionMatchView+ViewState.swift"; sourceTree = "<group>"; };
 		D811449027CFA33C008FB825 /* CompetitionMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionMatchViewController.swift; sourceTree = "<group>"; };
+		D884E50427D62958006EAD05 /* UIActivityIndicatorView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Extensions.swift"; sourceTree = "<group>"; };
+		D884E50627D62DEC006EAD05 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		D884E50827D7B00C006EAD05 /* RoundedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonStyle.swift; sourceTree = "<group>"; };
 		D89EA49027D372A400B8DAB3 /* CompetitionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewCell.swift; sourceTree = "<group>"; };
 		D89EA49327D374CC00B8DAB3 /* CompetitionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewState.swift; sourceTree = "<group>"; };
 		D8CC2DA827D2FD7000EC3FDE /* MatchDashboardView+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchDashboardView+Core.swift"; sourceTree = "<group>"; };
@@ -255,6 +263,9 @@
 			children = (
 				D811445D27CBC1B9008FB825 /* Sectionable.swift */,
 				D811445B27CBC146008FB825 /* Applicable.swift */,
+				D8102F0227D6280500227A21 /* AppError.swift */,
+				D884E50627D62DEC006EAD05 /* MessageView.swift */,
+				D884E50827D7B00C006EAD05 /* RoundedButtonStyle.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -266,6 +277,7 @@
 				D811447F27CCC227008FB825 /* Array+Extensions.swift */,
 				D811446227CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift */,
 				D811447727CBD699008FB825 /* Sequence+Extensions.swift */,
+				D884E50427D62958006EAD05 /* UIActivityIndicatorView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -520,11 +532,13 @@
 				D811447D27CCC013008FB825 /* StandingDashboardView+Core.swift in Sources */,
 				D811448F27CFA32C008FB825 /* CompetitionMatchView+ViewState.swift in Sources */,
 				D811447127CBC88D008FB825 /* Secrets.swift in Sources */,
+				D884E50527D62958006EAD05 /* UIActivityIndicatorView+Extensions.swift in Sources */,
 				D811444A27CBBE59008FB825 /* StoreViewController.swift in Sources */,
 				D8102EFD27D46E8300227A21 /* MyTeamsDashboardView+ViewState.swift in Sources */,
 				D8CC2DAC27D2FD8E00EC3FDE /* MatchDashboardView+ViewState.swift in Sources */,
 				D89EA49427D374CC00B8DAB3 /* CompetitionViewState.swift in Sources */,
 				D811446327CBC254008FB825 /* UITableViewDiffableDataSource+Extensions.swift in Sources */,
+				D884E50727D62DEC006EAD05 /* MessageView.swift in Sources */,
 				D89EA49127D372A400B8DAB3 /* CompetitionViewCell.swift in Sources */,
 				D811444F27CBBECC008FB825 /* CompetitionStandingView+Core.swift in Sources */,
 				D811444827CBBE43008FB825 /* StoreViewState.swift in Sources */,
@@ -533,8 +547,10 @@
 				D811446127CBC212008FB825 /* Array+Sectionable.swift in Sources */,
 				D811448027CCC227008FB825 /* Array+Extensions.swift in Sources */,
 				D811445427CBBF19008FB825 /* CompetitionStandingViewController.swift in Sources */,
+				D884E50927D7B00C006EAD05 /* RoundedButtonStyle.swift in Sources */,
 				D8CC2DB227D315F300EC3FDE /* Theme.swift in Sources */,
 				D811447827CBD699008FB825 /* Sequence+Extensions.swift in Sources */,
+				D8102F0327D6280500227A21 /* AppError.swift in Sources */,
 				D811448427CCCA17008FB825 /* StandingDashboardViewController.swift in Sources */,
 				D8102EFB27D46E7A00227A21 /* MyTeamsDashboardView+Core.swift in Sources */,
 				D811446C27CBC418008FB825 /* TeamDetailViewCell.swift in Sources */,

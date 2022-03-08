@@ -16,7 +16,11 @@ extension StandingDashboardView {
 
         let title: String
         let sections: [Section]
-        let isRequestInFlight: Bool
+        let isShowingLoading: Bool
+        let isShowingError: Bool
+        let errorMessage: String?
+        let errorSystemImageName: String?
+        let retryButtonTitle: String
 
         init(state: State) {
             self.title = "Standings"
@@ -31,7 +35,11 @@ extension StandingDashboardView {
                     )
                 }
 
-            self.isRequestInFlight = state.isRequestInFlight
+            self.isShowingLoading = state.isRequestInFlight
+            self.isShowingError = !state.isRequestInFlight && state.error != nil
+            self.errorMessage = state.error?.message
+            self.errorSystemImageName = state.error != nil ? "exclamationmark.icloud" : nil
+            self.retryButtonTitle = "RETRY"
         }
     }
 }

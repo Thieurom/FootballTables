@@ -22,6 +22,14 @@ class MatchDashboardViewController: StoreViewController<MatchDashboardView.State
         $0.backgroundColor = .clear
     }
 
+    lazy var errorView = MessageView().apply {
+        $0.titleLabel.textColor = .gray
+        $0.imageView.tintColor = .gray
+    }
+
+    lazy var retryButton = UIButton(type: .system)
+        .apply(UIButton.roundedButtonStyle)
+
     // MARK: - DataSource
 
     private var dataSource: UITableViewDiffableDataSource<MatchDashboardView.ViewState.Section, MatchDashboardView.ViewState.SectionItem>!
@@ -36,7 +44,7 @@ class MatchDashboardViewController: StoreViewController<MatchDashboardView.State
         setupChildViewControllers()
         observeViewStore()
 
-        viewStore.send(.viewDidLoad)
+        viewStore.send(.fetchMatches)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -57,8 +65,8 @@ extension MatchDashboardViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
 
         // Layout
-        view.addSubview(dashboardTableView)
-        view.addSubview(loadingIndicator)
+        [dashboardTableView, loadingIndicator, errorView, retryButton]
+            .forEach(view.addSubview)
 
         dashboardTableView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -70,6 +78,20 @@ extension MatchDashboardViewController {
         loadingIndicator.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+        }
+
+        errorView.snp.makeConstraints { make in
+            make.height.equalTo(100)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+
+        retryButton.snp.makeConstraints { make in
+            make.height.equalTo(32)
+            make.top.equalTo(errorView.snp.bottom).offset(48)
+            make.centerX.equalToSuperview()
         }
 
         dashboardTableView.register(CompetitionViewCell.self, forCellReuseIdentifier: CompetitionViewCell.identifier)
@@ -141,6 +163,7 @@ extension MatchDashboardViewController {
 
 extension MatchDashboardViewController {
     private func observeViewStore() {
+        //
         viewStore.publisher
             .title
             .map(Optional.some)
@@ -148,20 +171,64 @@ extension MatchDashboardViewController {
             .store(in: &cancellables)
 
         viewStore.publisher
-            .isRequestInFlight
-            .sink { [weak self] in
-                if $0 {
-                    self?.loadingIndicator.startAnimating()
-                } else {
-                    self?.loadingIndicator.stopAnimating()
-                }
-            }
-            .store(in: &cancellables)
-
-        viewStore.publisher
             .sections
             .map(\.snapshot)
             .assign(to: \.snapshot, on: dataSource)
             .store(in: &cancellables)
+
+        viewStore.publisher
+            .isShowingLoading
+            .assign(to: \._isAnimating, on: loadingIndicator)
+            .store(in: &cancellables)
+
+        viewStore.publisher
+            .errorMessage
+            .sink { [weak self] in
+                self?.errorView.setTitle($0)
+            }
+            .store(in: &cancellables)
+
+        viewStore.publisher
+            .errorSystemImageName
+            .compactMap { $0 }
+            .map(UIImage.init(systemName:))
+            .sink { [weak self] in
+                self?.errorView.setImage($0)
+            }
+            .store(in: &cancellables)
+
+        viewStore.publisher
+            .retryButtonTitle
+            .sink { [weak self] in
+                self?.retryButton.setTitle($0, for: .normal)
+            }
+            .store(in: &cancellables)
+
+        viewStore.publisher
+            .isShowingError
+            .map(!)
+            .assign(to: \.isHidden, on: errorView)
+            .store(in: &cancellables)
+
+        viewStore.publisher
+            .isShowingError
+            .map(!)
+            .assign(to: \.isHidden, on: retryButton)
+            .store(in: &cancellables)
+
+        viewStore.publisher
+            .isShowingError
+            .assign(to: \.isUserInteractionEnabled, on: retryButton)
+            .store(in: &cancellables)
+
+        viewStore.publisher
+            .isShowingError
+            .assign(to: \.isHidden, on: dashboardTableView)
+            .store(in: &cancellables)
+
+        //
+        retryButton.addAction( .init { [weak self] _ in
+            self?.viewStore.send(.fetchMatches)
+        }, for: .touchUpInside)
     }
 }

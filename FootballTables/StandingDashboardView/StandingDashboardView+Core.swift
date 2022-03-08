@@ -18,8 +18,9 @@ struct StandingDashboardView {
         }
 
         let competitionIds: [Int]
-        var isRequestInFlight: Bool = false
         var competionStandings = [CompetitionStanding]()
+        var error: AppError? = nil
+        var isRequestInFlight: Bool = false
 
         var standingSections: [StandingSection] {
             return competionStandings
@@ -48,7 +49,7 @@ struct StandingDashboardView {
     }
 
     enum Action: Equatable {
-        case viewDidLoad
+        case fetchCompetitionStanding
         case competitionStandingsResponse(Result<[CompetitionStanding], ApiError>)
         case selectCompetitionStanding(CompetitionStanding?)
         case selectSectionHeader(Int)
@@ -79,10 +80,10 @@ struct StandingDashboardView {
                 environment: { _ in CompetitionStandingView.Environment() }),
 
             .init { state, action, environment in
-                struct CompetionRequestId: Hashable {}
+                struct CancelId: Hashable {}
 
                 switch action {
-                case .viewDidLoad:
+                case .fetchCompetitionStanding:
                     state.isRequestInFlight = true
 
                     return state.competitionIds
@@ -93,16 +94,18 @@ struct StandingDashboardView {
                         .combineLatest()
                         .receive(on: environment.mainQueue)
                         .catchToEffect(Action.competitionStandingsResponse)
-                        .cancellable(id: CompetionRequestId(), cancelInFlight: true)
+                        .cancellable(id: CancelId(), cancelInFlight: true)
                     
                 case .competitionStandingsResponse(.success(let standings)):
                     state.isRequestInFlight = false
                     state.competionStandings = standings
+                    state.error = nil
                     return .none
 
                 case .competitionStandingsResponse(.failure):
                     state.isRequestInFlight = false
                     state.competionStandings = []
+                    state.error = AppError(message: "There's a problem fetching data!")
                     return .none
 
                 case .selectCompetitionStanding(let competitionStanding):

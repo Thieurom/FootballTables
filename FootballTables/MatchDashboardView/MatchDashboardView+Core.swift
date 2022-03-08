@@ -23,6 +23,7 @@ struct MatchDashboardView {
 
         let competitionIds: [Int]
         var matches: [[Match]] = []
+        var error: AppError? = nil
         var isRequestInFlight: Bool = false
 
         var matchSections: [MatchSection] {
@@ -74,8 +75,8 @@ struct MatchDashboardView {
     }
 
     enum Action: Equatable {
-        case viewDidLoad
-        case competitionsResponse(Result<[[Match]], ApiError>)
+        case fetchMatches
+        case matchesResponse(Result<[[Match]], ApiError>)
         case selectCompetition(Competition?)
 
         // Child actions
@@ -113,8 +114,10 @@ struct MatchDashboardView {
             ),
 
         .init { state, action, environment in
+            struct CancelId: Hashable {}
+
             switch action {
-            case .viewDidLoad:
+            case .fetchMatches:
                 state.isRequestInFlight = true
 
                 return state.competitionIds
@@ -125,16 +128,19 @@ struct MatchDashboardView {
                     }
                     .combineLatest()
                     .receive(on: environment.mainQueue)
-                    .catchToEffect(Action.competitionsResponse)
+                    .catchToEffect(Action.matchesResponse)
+                    .cancellable(id: CancelId(), cancelInFlight: true)
 
-            case .competitionsResponse(.success(let matches)):
+            case .matchesResponse(.success(let matches)):
                 state.isRequestInFlight = false
                 state.matches = matches
+                state.error = nil
                 return .none
 
-            case .competitionsResponse(.failure):
+            case .matchesResponse(.failure):
                 state.isRequestInFlight = false
                 state.matches = []
+                state.error = AppError(message: "There's a problem fetching data!")
                 return .none
 
             case .selectCompetition(let competition):

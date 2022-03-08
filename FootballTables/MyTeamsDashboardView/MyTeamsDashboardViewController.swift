@@ -13,16 +13,9 @@ class MyTeamsDashboardViewController: StoreViewController<MyTeamsDashboardView.S
 
     // MARK: - Views
 
-    lazy var placeholderImageView = UIImageView().apply {
-        $0.contentMode = .scaleAspectFit
-    }
-
-    lazy var placeholderLabel = UILabel().apply {
-        $0.font = .systemFont(ofSize: 20)
-        $0.textColor = .gray
-        $0.textAlignment = .center
-        $0.numberOfLines = 0
-        $0.lineBreakMode = .byWordWrapping
+    lazy var placeholderView = MessageView().apply {
+        $0.titleLabel.textColor = .gray
+        $0.imageView.tintColor = .gray
     }
 
     // MARK: - View lifecycle
@@ -45,21 +38,14 @@ extension MyTeamsDashboardViewController {
         view.backgroundColor = .theme
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        view.addSubview(placeholderImageView)
-        view.addSubview(placeholderLabel)
+        view.addSubview(placeholderView)
 
-        placeholderImageView.snp.makeConstraints { make in
-            make.width.equalTo(100)
+        placeholderView.snp.makeConstraints { make in
             make.height.equalTo(100)
             make.centerX.equalToSuperview()
-        }
-
-        placeholderLabel.snp.makeConstraints { make in
-            make.top.equalTo(placeholderImageView.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(40)
-            make.trailing.equalToSuperview().offset(-40)
-            make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
     }
 }
@@ -74,9 +60,7 @@ extension MyTeamsDashboardViewController {
             .assign(to: \.title, on: self, ownership: .weak)
             .store(in: &cancellables)
 
-        // TODO:
-        placeholderImageView.image = UIImage(systemName: "square.grid.3x2")
-        placeholderImageView.tintColor = .gray
-        placeholderLabel.text = "Your favorite teams appear here!".uppercased()
+        placeholderView.setImage(UIImage(systemName: "square.grid.3x2")!)
+        placeholderView.setTitle("Your favorite teams appear here!")
     }
 }
