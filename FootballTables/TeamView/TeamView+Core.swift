@@ -10,11 +10,17 @@ import FootballDataClient
 
 struct TeamView {
     struct State: Equatable {
-        let competition: Competition
-        let teamStanding: TeamStanding
+        var team: CompetitionTeam
         var matches = [Match]()
         var error: AppError? = nil
         var isRequestInFlight: Bool = false
+
+        var teamDetailViewState: TeamDetailViewState {
+            get {
+                .init(team: team)
+            }
+            set {}
+        }
     }
 
     enum Action: Equatable {
@@ -22,6 +28,7 @@ struct TeamView {
         case matchesResponse(Result<[Match], ApiError>)
 
         // Child actions
+        case teamDetailAction(TeamDetailViewCell.Action)
         case matchAction(id: MatchViewState.ID, action: MatchViewCell.Action)
     }
 
@@ -30,36 +37,50 @@ struct TeamView {
         var mainQueue: AnySchedulerOf<DispatchQueue>
     }
 
-    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
-        struct CancelId: Hashable {}
+    static let reducer: Reducer<State, Action, Environment> = .combine(
+        TeamDetailViewCell.reducer
+            .pullback(
+                state: \.teamDetailViewState,
+                action: /Action.teamDetailAction,
+                environment: { _ in  }
+            ),
 
-        switch action {
-        case .fetchMatches:
-            state.isRequestInFlight = true
-            let teamId = state.teamStanding.team.id
-            let competition = state.competition
+        Reducer { state, action, environment in
+            struct CancelId: Hashable {}
 
-            return environment.apiClient
-                .fetchMatches(teamId: teamId)
-                .receive(on: environment.mainQueue)
-                .map { $0.filter { $0.competition.id == competition.id } }
-                .catchToEffect(Action.matchesResponse)
-                .cancellable(id: CancelId(), cancelInFlight: true)
+            switch action {
+            case .fetchMatches:
+                state.isRequestInFlight = true
+                let teamId = state.team.id
+                let competition = state.team.competingCompetition
 
-        case .matchesResponse(.success(let matches)):
-            state.isRequestInFlight = false
-            state.matches = matches
-            state.error = nil
-            return .none
+                return environment.apiClient
+                    .fetchMatches(teamId: teamId)
+                    .receive(on: environment.mainQueue)
+                    .map { $0.filter { $0.competition.id == competition.id } }
+                    .catchToEffect(Action.matchesResponse)
+                    .cancellable(id: CancelId(), cancelInFlight: true)
 
-        case .matchesResponse(.failure):
-            state.isRequestInFlight = false
-            state.matches = []
-            state.error = AppError(message: "There's a problem fetching data!")
-            return .none
+            case .matchesResponse(.success(let matches)):
+                state.isRequestInFlight = false
+                state.matches = matches
+                state.error = nil
+                return .none
 
-        case .matchAction:
-            return .none
+            case .matchesResponse(.failure):
+                state.isRequestInFlight = false
+                state.matches = []
+                state.error = AppError(message: "There's a problem fetching data!")
+                return .none
+
+                // Child actions
+            case .teamDetailAction(.followButtonTapped):
+                state.team.isFollowing.toggle()
+                return .none
+
+            case .matchAction:
+                return .none
+            }
         }
-    }
+    )
 }

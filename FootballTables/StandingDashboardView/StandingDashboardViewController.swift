@@ -29,6 +29,7 @@ class StandingDashboardViewController: StoreViewController<StandingDashboardView
 
     lazy var retryButton = UIButton(type: .system)
         .apply(UIButton.roundedButtonStyle)
+        .apply(UIButton.secondaryButtonStyle)
 
     // MARK: - DataSource
 
@@ -97,6 +98,8 @@ extension StandingDashboardViewController {
         standingTableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         standingTableView.register(TeamStandingViewCell.self, forCellReuseIdentifier: TeamStandingViewCell.identifier)
         standingTableView.delegate = self
+
+        retryButton.addTarget(self, action: #selector(StandingDashboardViewController.retryButtonDidTap), for: .touchUpInside)
     }
 
     private func setupDataSource() {
@@ -127,12 +130,17 @@ extension StandingDashboardViewController {
             })
             .ifLet { [weak self] store in
                 let competitionStandingViewController = CompetitionStandingViewController(store: store)
+                competitionStandingViewController.hidesBottomBarWhenPushed = true
                 self?.navigationController?.pushViewController(competitionStandingViewController, animated: true)
             } else: { [weak self] in
                 guard let self = self else { return }
                 self.navigationController?.popToViewController(self, animated: true)
             }
             .store(in: &cancellables)
+    }
+
+    @objc private func retryButtonDidTap() {
+        viewStore.send(.fetchCompetitionStanding)
     }
 }
 
@@ -220,10 +228,5 @@ extension StandingDashboardViewController {
             .isShowingError
             .assign(to: \.isHidden, on: standingTableView)
             .store(in: &cancellables)
-
-        //
-        retryButton.addAction( .init { [weak self] _ in
-            self?.viewStore.send(.fetchCompetitionStanding)
-        }, for: .touchUpInside)
     }
 }

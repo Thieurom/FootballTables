@@ -29,6 +29,7 @@ class MatchDashboardViewController: StoreViewController<MatchDashboardView.State
 
     lazy var retryButton = UIButton(type: .system)
         .apply(UIButton.roundedButtonStyle)
+        .apply(UIButton.secondaryButtonStyle)
 
     // MARK: - DataSource
 
@@ -96,6 +97,8 @@ extension MatchDashboardViewController {
 
         dashboardTableView.register(CompetitionViewCell.self, forCellReuseIdentifier: CompetitionViewCell.identifier)
         dashboardTableView.register(MatchViewCell.self, forCellReuseIdentifier: MatchViewCell.identifier)
+
+        retryButton.addTarget(self, action: #selector(MatchDashboardViewController.retryButtonDidTap), for: .touchUpInside)
     }
 
     private func setupDataSource() {
@@ -150,12 +153,17 @@ extension MatchDashboardViewController {
             })
             .ifLet { [weak self] store in
                 let competitionMatchController = CompetitionMatchViewController(store: store)
+                competitionMatchController.hidesBottomBarWhenPushed = true
                 self?.navigationController?.pushViewController(competitionMatchController, animated: true)
             } else: { [weak self] in
                 guard let self = self else { return }
                 self.navigationController?.popToViewController(self, animated: true)
             }
             .store(in: &cancellables)
+    }
+
+    @objc private func retryButtonDidTap() {
+        viewStore.send(.fetchMatches)
     }
 }
 
@@ -225,10 +233,5 @@ extension MatchDashboardViewController {
             .isShowingError
             .assign(to: \.isHidden, on: dashboardTableView)
             .store(in: &cancellables)
-
-        //
-        retryButton.addAction( .init { [weak self] _ in
-            self?.viewStore.send(.fetchMatches)
-        }, for: .touchUpInside)
     }
 }

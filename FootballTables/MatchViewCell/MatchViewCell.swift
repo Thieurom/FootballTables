@@ -18,9 +18,7 @@ class MatchViewCell: StoreTableViewCell<MatchViewState, MatchViewCell.Action> {
         case selected
     }
 
-    struct Environment {}
-
-    static let reducer = Reducer<MatchViewState, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<MatchViewState, Action, Void> { state, action, _ in
         switch action {
         case .selected:
             return .none
@@ -117,17 +115,17 @@ extension MatchViewCell {
                 scoreLabel,
                 awayTeamNameLabel
             ]
-        )
+        ).apply {
+            $0.isLayoutMarginsRelativeArrangement = true
+            $0.directionalLayoutMargins = .init(
+                top: 8, leading: 16, bottom: 8, trailing: 16
+            )
 
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.directionalLayoutMargins = .init(
-            top: 8, leading: 16, bottom: 8, trailing: 16
-        )
-
-        stackView.axis = .horizontal
-        stackView.spacing = 16
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
+            $0.axis = .horizontal
+            $0.spacing = 16
+            $0.alignment = .center
+            $0.distribution = .fillProportionally
+        }
 
         contentView.addSubview(matchDayLabel)
         contentView.addSubview(stackView)

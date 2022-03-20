@@ -29,6 +29,7 @@ class CompetitionMatchViewController: StoreViewController<CompetitionMatchView.S
 
     lazy var retryButton = UIButton(type: .system)
         .apply(UIButton.roundedButtonStyle)
+        .apply(UIButton.secondaryButtonStyle)
 
     // MARK: - DataSource
 
@@ -86,6 +87,8 @@ extension CompetitionMatchViewController {
         }
 
         dashboardTableView.register(MatchViewCell.self, forCellReuseIdentifier: MatchViewCell.identifier)
+
+        retryButton.addTarget(self, action: #selector(CompetitionMatchViewController.retryButtonDidTap), for: .touchUpInside)
     }
 
     private func setupDataSource() {
@@ -109,6 +112,10 @@ extension CompetitionMatchViewController {
         }
 
         dataSource.defaultRowAnimation = .fade
+    }
+
+    @objc private func retryButtonDidTap() {
+        viewStore.send(.fetchMatches)
     }
 }
 
@@ -177,11 +184,5 @@ extension CompetitionMatchViewController {
             .isShowingError
             .assign(to: \.isHidden, on: dashboardTableView)
             .store(in: &cancellables)
-
-        //
-        retryButton.addAction( .init { [weak self] _ in
-            self?.viewStore.send(.fetchMatches)
-        }, for: .touchUpInside)
-
     }
 }

@@ -32,10 +32,7 @@ extension TeamView {
                 .sorted { $0.matchDay > $1.matchDay }
 
             self.sections = [
-                Self.buildTeamSection(
-                    teamStanding: state.teamStanding,
-                    competitionName: state.competition.name
-                ),
+                Self.buildTeamSection(team: state.team),
                 Self.buildMatchesSections(matches: finishedMatches)
             ]
 
@@ -48,27 +45,10 @@ extension TeamView {
     }
 }
 
-struct TeamDetailViewState: Identifiable, Hashable {
-    let id: Int
-    let teamName: String
-    let teamLogoUrl: URL?
-    let position: String
-}
-
 extension TeamView.ViewState {
-    fileprivate static func buildTeamSection(teamStanding: TeamStanding, competitionName: String) -> Section {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.locale = Locale(identifier: "en_US")
-        numberFormatter.numberStyle = .ordinal
-
-        let _position = numberFormatter.string(from: NSNumber(value: teamStanding.position))!
-        let position = "\(_position) - \(competitionName)"
-
+    fileprivate static func buildTeamSection(team: CompetitionTeam) -> Section {
         let teamDetail = TeamDetailViewState(
-            id: teamStanding.team.id,
-            teamName: teamStanding.team.name,
-            teamLogoUrl: teamStanding.team.crestUrl,
-            position: position
+            team: team
         )
 
         return .init(items: [SectionItem.team(teamDetail)])

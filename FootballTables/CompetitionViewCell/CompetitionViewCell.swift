@@ -18,9 +18,7 @@ class CompetitionViewCell: StoreTableViewCell<CompetitionViewState, CompetitionV
         case selected
     }
 
-    struct Environment {}
-
-    static let reducer = Reducer<CompetitionViewState, Action, Environment> { state, action, _ in
+    static let reducer = Reducer<CompetitionViewState, Action, Void> { state, action, _ in
         switch action {
         case .selected:
             return .none

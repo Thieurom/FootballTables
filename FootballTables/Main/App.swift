@@ -9,11 +9,59 @@ import ComposableArchitecture
 import FootballDataClient
 
 struct AppState: Equatable {
+    let competitionIds: [Int]
+    var followingTeams = [CompetitionTeam]()
 
     // Child states
-    var matchDashboard: MatchDashboardView.State
-    var standingDashboard: StandingDashboardView.State
-    var myTeamsDashboard: MyTeamsDashboardView.State
+    var _matchDashboard: MatchDashboardView.State?
+    var matchDashboard: MatchDashboardView.State {
+        get {
+            _matchDashboard ?? .init(competitionIds: competitionIds)
+        }
+        
+        set {
+            _matchDashboard = newValue
+        }
+    }
+
+    var _standingDashboard: StandingDashboardView.State?
+    var standingDashboard: StandingDashboardView.State {
+        get {
+            if _standingDashboard == nil {
+                return .init(
+                    competitionIds: competitionIds,
+                    followingTeams: followingTeams
+                )
+            }
+
+            var copy = _standingDashboard!
+            copy.followingTeams = followingTeams
+            return copy
+        }
+
+        set {
+            followingTeams = newValue.followingTeams
+            _standingDashboard = newValue
+        }
+    }
+
+    var _myTeamsDashboard: MyTeamsDashboardView.State?
+    var myTeamsDashboard: MyTeamsDashboardView.State {
+        get {
+            if _myTeamsDashboard == nil {
+                return  .init(followingTeams: followingTeams)
+            }
+
+            var copy = _myTeamsDashboard!
+            copy.followingTeams = followingTeams
+            return copy
+        }
+
+        set {
+            followingTeams = newValue.followingTeams
+            _myTeamsDashboard = newValue
+        }
+    }
 }
 
 struct AppViewState: StoreViewState {
@@ -21,6 +69,8 @@ struct AppViewState: StoreViewState {
 }
 
 enum AppAction: Equatable {
+    case viewDidLoad
+
     // Child actions
     case matchDashboardAction(MatchDashboardView.Action)
     case standingDashboardAction(StandingDashboardView.Action)
@@ -71,10 +121,17 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
     Reducer { state, action, environment in
         switch action {
+        case .viewDidLoad:
+            // TODO: Load following team ids from persistent storage!
+            state.followingTeams = []
+            return .none
+
         case .matchDashboardAction:
             return .none
+
         case .standingDashboardAction:
             return .none
+
         case .myTeamsDashboardAction:
             return .none
         }

@@ -11,8 +11,8 @@ import UIKit
 
 public class StoreViewController<State, ViewState, Action>: UIViewController where State: Equatable, ViewState: StoreViewState, ViewState.State == State {
 
-    public let store: Store<State, Action>
-    public let viewStore: ViewStore<ViewState, Action>
+    let store: Store<State, Action>
+    let viewStore: ViewStore<ViewState, Action>
     public var cancellables = Set<AnyCancellable>()
 
     public init(store: Store<State, Action>) {

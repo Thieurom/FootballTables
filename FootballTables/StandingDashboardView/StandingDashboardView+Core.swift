@@ -18,6 +18,7 @@ struct StandingDashboardView {
         }
 
         let competitionIds: [Int]
+        var followingTeams: [CompetitionTeam]
         var competionStandings = [CompetitionStanding]()
         var error: AppError? = nil
         var isRequestInFlight: Bool = false
@@ -45,7 +46,19 @@ struct StandingDashboardView {
             set {}
         }
 
-        var selectedCompetitionStanding: CompetitionStandingView.State?
+        var _selectedCompetitionStanding: CompetitionStandingView.State?
+
+        var selectedCompetitionStanding: CompetitionStandingView.State? {
+            get {
+                return _selectedCompetitionStanding
+            }
+            set {
+                if let updatedFollowingTeams = newValue?.followingTeams {
+                    followingTeams = updatedFollowingTeams
+                }
+                _selectedCompetitionStanding = newValue
+            }
+        }
     }
 
     enum Action: Equatable {
@@ -69,7 +82,7 @@ struct StandingDashboardView {
             .forEach(
                 state: \.teamStandingViewStates,
                 action: /Action.teamStandingAction,
-                environment: { _ in TeamStandingViewCell.Environment() }
+                environment: { _ in }
             ),
 
         CompetitionStandingView.reducer
@@ -79,67 +92,68 @@ struct StandingDashboardView {
                 action: /Action.competitionStandingAction,
                 environment: { _ in CompetitionStandingView.Environment() }),
 
-            .init { state, action, environment in
-                struct CancelId: Hashable {}
+        Reducer { state, action, environment in
+            struct CancelId: Hashable {}
 
-                switch action {
-                case .fetchCompetitionStanding:
-                    state.isRequestInFlight = true
+            switch action {
+            case .fetchCompetitionStanding:
+                state.isRequestInFlight = true
 
-                    return state.competitionIds
-                        .removeAllDuplicates()
-                        .map {
-                            environment.apiClient.fetchStanding(competitionId: $0)
-                        }
-                        .combineLatest()
-                        .receive(on: environment.mainQueue)
-                        .catchToEffect(Action.competitionStandingsResponse)
-                        .cancellable(id: CancelId(), cancelInFlight: true)
-                    
-                case .competitionStandingsResponse(.success(let standings)):
-                    state.isRequestInFlight = false
-                    state.competionStandings = standings
-                    state.error = nil
-                    return .none
-
-                case .competitionStandingsResponse(.failure):
-                    state.isRequestInFlight = false
-                    state.competionStandings = []
-                    state.error = AppError(message: "There's a problem fetching data!")
-                    return .none
-
-                case .selectCompetitionStanding(let competitionStanding):
-                    if let competitionStanding = competitionStanding {
-                        state.selectedCompetitionStanding = CompetitionStandingView.State(
-                            competionStanding: competitionStanding
-                        )
-                    } else {
-                        state.selectedCompetitionStanding = nil
+                return state.competitionIds
+                    .removeAllDuplicates()
+                    .map {
+                        environment.apiClient.fetchStanding(competitionId: $0)
                     }
-                    return .none
+                    .combineLatest()
+                    .receive(on: environment.mainQueue)
+                    .catchToEffect(Action.competitionStandingsResponse)
+                    .cancellable(id: CancelId(), cancelInFlight: true)
 
-                case .selectSectionHeader(let section):
-                    guard (0..<state.standingSections.count) ~= section else {
-                        return .none
-                    }
+            case .competitionStandingsResponse(.success(let standings)):
+                state.isRequestInFlight = false
+                state.competionStandings = standings
+                state.error = nil
+                return .none
 
-                    let standingSection = state.standingSections[section]
-                    return Effect(value: .selectCompetitionStanding(standingSection.competitionStanding))
+            case .competitionStandingsResponse(.failure):
+                state.isRequestInFlight = false
+                state.competionStandings = []
+                state.error = AppError(message: "There's a problem fetching data!")
+                return .none
 
-                case .teamStandingAction(let id, action: .selected):
-                    // OMG!!!
-                    guard let section = state.standingSections.first(where: { $0.standings.contains(where: { $0.team.id == id }) }) else {
-                        return .none
-                    }
-                    
-                    return Effect(value: .selectCompetitionStanding(section.competitionStanding))
+            case .selectCompetitionStanding(let competitionStanding):
+                if let competitionStanding = competitionStanding {
+                    state.selectedCompetitionStanding = CompetitionStandingView.State(
+                        competionStanding: competitionStanding,
+                        followingTeams: state.followingTeams
+                    )
+                } else {
+                    state.selectedCompetitionStanding = nil
+                }
+                return .none
 
-                case .teamStandingAction:
-                    return .none
-
-                case .competitionStandingAction:
+            case .selectSectionHeader(let section):
+                guard (0..<state.standingSections.count) ~= section else {
                     return .none
                 }
+
+                let standingSection = state.standingSections[section]
+                return Effect(value: .selectCompetitionStanding(standingSection.competitionStanding))
+
+            case .teamStandingAction(let id, action: .selected):
+                // OMG!!!
+                guard let section = state.standingSections.first(where: { $0.standings.contains(where: { $0.team.id == id }) }) else {
+                    return .none
+                }
+
+                return Effect(value: .selectCompetitionStanding(section.competitionStanding))
+
+            case .teamStandingAction:
+                return .none
+
+            case .competitionStandingAction:
+                return .none
             }
+        }
     )
 }

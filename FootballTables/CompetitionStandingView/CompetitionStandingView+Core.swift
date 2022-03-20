@@ -12,10 +12,26 @@ import IdentifiedCollections
 struct CompetitionStandingView {
     struct State: Equatable {
         let competionStanding: CompetitionStanding
+        var followingTeams: [CompetitionTeam]
 
         // Child states
 
-        var selectedTeam: TeamView.State?
+        var _selectedTeam: TeamView.State?
+        var selectedTeam: TeamView.State? {
+            get {
+                return _selectedTeam
+            }
+            set {
+                if let teamViewState = newValue, teamViewState != selectedTeam {
+                    if teamViewState.team.isFollowing {
+                        followingTeams.append(teamViewState.team)
+                    } else {
+                        followingTeams.removeAll(where: { $0.id == teamViewState.team.id })
+                    }
+                }
+                _selectedTeam = newValue
+            }
+        }
 
         var standings: IdentifiedArrayOf<TeamStandingViewState> {
             get {
@@ -45,7 +61,7 @@ struct CompetitionStandingView {
             .forEach(
                 state: \.standings,
                 action: /Action.standingAction,
-                environment: { _ in TeamStandingViewCell.Environment() }
+                environment: { _ in }
             ),
 
         TeamView.reducer
@@ -61,9 +77,7 @@ struct CompetitionStandingView {
                 }
             ),
 
-        .init { state, action, environment in
-            struct CompetionRequestId: Hashable {}
-
+        Reducer { state, action, environment in
             switch action {
             case .standingAction(let id, action: .selected):
                 guard let teamStanding = state.competionStanding.table.first(where: { $0.team.id == id }) else {
@@ -75,8 +89,11 @@ struct CompetitionStandingView {
             case .selectTeamStanding(let teamStanding):
                 if let teamStanding = teamStanding {
                     state.selectedTeam = TeamView.State(
-                        competition: state.competionStanding.competition,
-                        teamStanding: teamStanding
+                        team: CompetitionTeam(
+                            teamStanding.team,
+                            competition: state.competionStanding.competition,
+                            isFollowing: state.followingTeams.contains(where: { $0.id == teamStanding.team.id })
+                        )
                     )
                 } else {
                     state.selectedTeam = nil

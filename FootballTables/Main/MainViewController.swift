@@ -10,11 +10,13 @@ import ComposableArchitecture
 import UIKit
 
 class MainViewController: UITabBarController {
-    let store: Store<AppState, AppAction>
+    private let store: Store<AppState, AppAction>
+    private let viewStore: ViewStore<AppState, AppAction>
     var cancellables = Set<AnyCancellable>()
 
     init(store: Store<AppState, AppAction>) {
         self.store = store
+        self.viewStore = ViewStore(store)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -26,6 +28,8 @@ class MainViewController: UITabBarController {
         super.viewDidLoad()
 
         setupChildViewControllers()
+
+        viewStore.send(.viewDidLoad)
     }
 }
 

@@ -22,9 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let store = Store(
             initialState: AppState(
-                matchDashboard: MatchDashboardView.State(competitionIds: competitionIds),
-                standingDashboard: StandingDashboardView.State(competitionIds: competitionIds),
-                myTeamsDashboard: MyTeamsDashboardView.State()
+                competitionIds: competitionIds
             ),
             reducer: appReducer,
             environment: AppEnvironment(

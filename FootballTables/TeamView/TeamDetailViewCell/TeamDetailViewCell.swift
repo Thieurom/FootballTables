@@ -9,8 +9,21 @@ import ComposableArchitecture
 import SnapKit
 import UIKit
 
-class TeamDetailViewCell: StoreTableViewCell<TeamDetailViewState, Never> {
+class TeamDetailViewCell: StoreTableViewCell<TeamDetailViewState, TeamDetailViewCell.Action> {
     static let identifier = "TeamDetailViewCell"
+
+    // MARK: - Core
+
+    enum Action {
+        case followButtonTapped
+    }
+
+    static let reducer = Reducer<TeamDetailViewState, Action, Void> { _, action, _ in
+        switch action {
+        case .followButtonTapped:
+            return .none
+        }
+    }
 
     // MARK: - Subviews
 
@@ -19,20 +32,23 @@ class TeamDetailViewCell: StoreTableViewCell<TeamDetailViewState, Never> {
     }
 
     lazy var teamNameLabel = UILabel().apply {
-        $0.numberOfLines = 0
-        $0.font = .systemFont(ofSize: 28, weight: .black)
+        $0.numberOfLines = 2
+        $0.font = .systemFont(ofSize: 24, weight: .semibold)
         $0.textColor = .black
         $0.textAlignment = .center
         $0.lineBreakMode = .byWordWrapping
     }
 
-    lazy var positionLabel = UILabel().apply {
+    lazy var competitionLabel = UILabel().apply {
         $0.numberOfLines = 1
-        $0.font = .systemFont(ofSize: 18, weight: .semibold)
+        $0.font = .systemFont(ofSize: 16, weight: .semibold)
         $0.textColor = .darkGray
         $0.textAlignment = .center
         $0.minimumScaleFactor = 0.75
     }
+
+    lazy var followButton = UIButton()
+        .apply(UIButton.roundedButtonStyle)
 
     // MARK: - Life cycle
 
@@ -68,10 +84,27 @@ class TeamDetailViewCell: StoreTableViewCell<TeamDetailViewState, Never> {
             .store(in: &cancellables)
 
         viewStore.publisher
-            .position
+            .competitionName
             .map(Optional.some)
-            .assign(to: \.text, on: positionLabel)
+            .assign(to: \.text, on: competitionLabel)
             .store(in: &cancellables)
+        
+        viewStore.publisher
+            .followingStatusTitle
+            .sink { [weak self] in
+                self?.followButton.setTitle($0, for: .normal)
+            }
+            .store(in: &cancellables)
+
+        viewStore.publisher
+            .isFollowing
+            .map { $0 ? UIButton.primaryButtonStyle : UIButton.secondaryButtonStyle }
+            .sink { [weak self] in
+                self?.followButton.apply($0)
+            }
+            .store(in: &cancellables)
+
+        followButton.addTarget(self, action: #selector(TeamDetailViewCell.followButtonDidTap), for: .touchUpInside)
     }
 }
 
@@ -81,11 +114,11 @@ extension TeamDetailViewCell {
     private func setupViews() {
         selectionStyle = .none
 
-        [teamLogoView, teamNameLabel, positionLabel]
+        [teamLogoView, teamNameLabel, competitionLabel, followButton]
             .forEach(contentView.addSubview)
 
         teamLogoView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(8)
             make.width.equalTo(110)
             make.height.equalTo(110)
             make.centerX.equalToSuperview()
@@ -98,15 +131,27 @@ extension TeamDetailViewCell {
             make.centerX.equalToSuperview()
         }
 
-        positionLabel.snp.makeConstraints { make in
-            make.top.equalTo(teamNameLabel.snp.bottom).offset(12)
+        competitionLabel.snp.makeConstraints { make in
+            make.top.equalTo(teamNameLabel.snp.bottom)
             make.leading.greaterThanOrEqualToSuperview()
             make.trailing.lessThanOrEqualToSuperview()
             make.centerX.equalToSuperview()
+        }
+
+        followButton.snp.makeConstraints { make in
+            make.top.equalTo(competitionLabel.snp.bottom).offset(12)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(32)
             make.bottom.equalToSuperview().offset(-24)
         }
 
-        teamNameLabel.snp.contentHuggingVerticalPriority = UILayoutPriority.defaultLow.rawValue + 1
-        teamNameLabel.snp.contentCompressionResistanceVerticalPriority = UILayoutPriority.defaultHigh.rawValue + 1
+        competitionLabel.snp.contentHuggingVerticalPriority = UILayoutPriority.defaultLow.rawValue - 1
+        competitionLabel.snp.contentCompressionResistanceVerticalPriority = UILayoutPriority.defaultHigh.rawValue - 1
+    }
+    
+    @objc private func followButtonDidTap() {
+        if let viewStore = viewStore {
+            viewStore.send(.followButtonTapped)
+        }
     }
 }

@@ -95,9 +95,7 @@ struct MatchDashboardView {
             .forEach(
                 state: \.matchViewStates,
                 action: /Action.matchAction,
-                environment: { _ in
-                    MatchViewCell.Environment()
-                }
+                environment: { _ in }
             ),
 
         CompetitionMatchView.reducer
@@ -113,7 +111,7 @@ struct MatchDashboardView {
                 }
             ),
 
-        .init { state, action, environment in
+        Reducer { state, action, environment in
             struct CancelId: Hashable {}
 
             switch action {
@@ -126,7 +124,9 @@ struct MatchDashboardView {
                         environment.apiClient
                             .fetchMatches(competitionId: $0)
                     }
-                    .combineLatest()
+                    .publisher
+                    .flatMap { $0 }
+                    .collect()
                     .receive(on: environment.mainQueue)
                     .catchToEffect(Action.matchesResponse)
                     .cancellable(id: CancelId(), cancelInFlight: true)

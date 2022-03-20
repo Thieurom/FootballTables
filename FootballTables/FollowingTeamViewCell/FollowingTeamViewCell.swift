@@ -1,22 +1,22 @@
 //
-//  TeamStandingViewCell.swift
+//  FollowingTeamViewCell.swift
 //  FootballTables
 //
-//  Created by Doan Le Thieu on 27/02/2022.
+//  Created by Doan Le Thieu on 14/03/2022.
 //
 
 import ComposableArchitecture
 import SnapKit
 import UIKit
 
-class TeamStandingViewCell: StoreTableViewCell<TeamStandingViewState, TeamStandingViewCell.Action> {
-    static let identifier = "TeamStandingViewCell"
+class FollowingTeamViewCell: StoreTableViewCell<FollowingTeamViewState, FollowingTeamViewCell.Action> {
+    static let identifier = "FollowingTeamViewCell"
 
     enum Action {
         case selected
     }
 
-    static let reducer = Reducer<TeamStandingViewState, Action, Void> { state, action, _ in
+    static let reducer = Reducer<FollowingTeamViewState, Action, Void> { _, action, _ in
         switch action {
         case .selected:
             return .none
@@ -24,13 +24,6 @@ class TeamStandingViewCell: StoreTableViewCell<TeamStandingViewState, TeamStandi
     }
 
     // MARK: - Subviews
-
-    lazy var positionLabel = UILabel().apply {
-        $0.numberOfLines = 1
-        $0.font = .systemFont(ofSize: 14, weight: .medium)
-        $0.textColor = .gray
-        $0.textAlignment = .right
-    }
 
     lazy var teamLogoView = UIImageView().apply {
         $0.contentMode = .scaleAspectFit
@@ -43,11 +36,11 @@ class TeamStandingViewCell: StoreTableViewCell<TeamStandingViewState, TeamStandi
         $0.textAlignment = .left
     }
 
-    lazy var pointsLabel = UILabel().apply {
-        $0.numberOfLines = 1
-        $0.font = .systemFont(ofSize: 24, weight: .semibold)
-        $0.textColor = .gray
-        $0.textAlignment = .right
+    private lazy var disclosureImagView = UIImageView().apply {
+        $0.contentMode = .scaleAspectFit
+        $0.image = UIImage(systemName: "chevron.right")?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.darkGray)
     }
 
     private lazy var tapGesture = UITapGestureRecognizer()
@@ -78,18 +71,6 @@ class TeamStandingViewCell: StoreTableViewCell<TeamStandingViewState, TeamStandi
             .store(in: &cancellables)
 
         viewStore.publisher
-            .position
-            .map(Optional.some)
-            .assign(to: \.text, on: positionLabel)
-            .store(in: &cancellables)
-
-        viewStore.publisher
-            .points
-            .map(Optional.some)
-            .assign(to: \.text, on: pointsLabel)
-            .store(in: &cancellables)
-
-        viewStore.publisher
             .logoUrl
             .compactMap { $0 }
             .sink { [weak self] in
@@ -97,20 +78,21 @@ class TeamStandingViewCell: StoreTableViewCell<TeamStandingViewState, TeamStandi
             }
             .store(in: &cancellables)
 
-        tapGesture.addTarget(self, action: #selector(TeamStandingViewCell.cellDidTap))
+        tapGesture.addTarget(self, action: #selector(FollowingTeamViewCell.cellDidTap))
     }
 }
 
 // MARK: - Setup
 
-extension TeamStandingViewCell {
+extension FollowingTeamViewCell {
     private func setupViews() {
+        selectionStyle = .none
+
         let stackView = UIStackView(
             arrangedSubviews: [
-                positionLabel,
                 teamLogoView,
                 teamNameLabel,
-                pointsLabel
+                disclosureImagView
             ]
         ).apply {
             $0.isLayoutMarginsRelativeArrangement = true
@@ -130,10 +112,6 @@ extension TeamStandingViewCell {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
-        }
-
-        positionLabel.snp.makeConstraints { make in
-            make.width.equalTo(24)
         }
 
         teamLogoView.snp.makeConstraints { make in

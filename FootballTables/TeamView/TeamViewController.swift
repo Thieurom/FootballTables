@@ -28,6 +28,7 @@ class TeamViewController: StoreViewController<TeamView.State, TeamView.ViewState
 
     lazy var retryButton = UIButton(type: .system)
         .apply(UIButton.roundedButtonStyle)
+        .apply(UIButton.secondaryButtonStyle)
 
     // MARK: - DataSource
 
@@ -84,6 +85,8 @@ extension TeamViewController {
 
         matchesTableView.register(TeamDetailViewCell.self, forCellReuseIdentifier: TeamDetailViewCell.identifier)
         matchesTableView.register(MatchViewCell.self, forCellReuseIdentifier: MatchViewCell.identifier)
+
+        retryButton.addTarget(self, action: #selector(TeamViewController.retryButtonDidTap), for: .touchUpInside)
     }
 
     private func setupDataSource() {
@@ -95,9 +98,11 @@ extension TeamViewController {
                 }
 
                 cell.store = self?.store
-                    .actionless
                     .scope(
-                        state: { _ in team }
+                        state: { _ in team },
+                        action: {
+                            TeamView.Action.teamDetailAction($0)
+                        }
                     )
 
                 return cell
@@ -123,6 +128,10 @@ extension TeamViewController {
         }
 
         dataSource.defaultRowAnimation = .fade
+    }
+
+    @objc private func retryButtonDidTap() {
+        viewStore.send(.fetchMatches)
     }
 }
 
@@ -185,10 +194,5 @@ extension TeamViewController {
             .isShowingError
             .assign(to: \.isHidden, on: matchesTableView)
             .store(in: &cancellables)
-
-        //
-        retryButton.addAction( .init { [weak self] _ in
-            self?.viewStore.send(.fetchMatches)
-        }, for: .touchUpInside)
     }
 }
