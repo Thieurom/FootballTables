@@ -6,7 +6,7 @@ bootstrap: secrets
 
 secrets:
 ifdef PRIVATE
-	@cat .env > FootballTables/Secrets/Secrets.swift
+	@cat .env > App/FootballTables/Secrets/Secrets.swift
 else
-	@cp FootballTables/Secrets/Secrets.swift.example FootballTables/Secrets/Secrets.swift
+	@cp App/FootballTables/Secrets/Secrets.swift.example App/FootballTables/Secrets/Secrets.swift
 endif
