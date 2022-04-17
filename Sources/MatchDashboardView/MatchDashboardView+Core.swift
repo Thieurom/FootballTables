@@ -5,6 +5,7 @@
 //  Created by Doan Le Thieu on 05/03/2022.
 //
 
+import CombineExt
 import ComposableArchitecture
 import CompetitionMatchView
 import CompetitionViewCell
@@ -139,10 +140,7 @@ public struct MatchDashboardView {
                     .map {
                         environment.apiClient.fetchMatches(competitionId: $0)
                     }
-                    .publisher
-                    .setFailureType(to: ApiError.self)
-                    .flatMap { $0 }
-                    .collect()
+                    .combineLatest()
                     .receive(on: environment.mainQueue)
                     .catchToEffect(Action.matchesResponse)
                     .cancellable(id: CancelId(), cancelInFlight: true)
