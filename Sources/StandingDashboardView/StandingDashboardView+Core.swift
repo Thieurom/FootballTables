@@ -5,6 +5,7 @@
 //  Created by Doan Le Thieu on 28/02/2022.
 //
 
+import CombineExt
 import ComposableArchitecture
 import CompetitionStandingView
 import FootballDataClient
@@ -129,10 +130,7 @@ public struct StandingDashboardView {
                     .map {
                         environment.apiClient.fetchStanding(competitionId: $0)
                     }
-                    .publisher
-                    .setFailureType(to: ApiError.self)
-                    .flatMap { $0 }
-                    .collect()
+                    .combineLatest()
                     .receive(on: environment.mainQueue)
                     .catchToEffect(Action.competitionStandingsResponse)
                     .cancellable(id: CancelId(), cancelInFlight: true)
